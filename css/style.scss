@@ -1,0 +1,90 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #282C35;
+}
+article, nav, section, main {
+  display: block;
+}
+
+.page {
+  display: flex;
+  margin-top: 50px;
+  height: 100%;
+  flex-wrap: wrap
+}
+
+.text-container {
+  margin-left: 50px;
+}
+
+.tags-container {
+  margin-left: 50px;
+  display: block;
+}
+
+$func-btn-color: rgb(230, 160, 70);
+$tag-btn-color: rgb(70, 160, 230);
+
+.func-btn {
+  margin: 5px;
+  // width: 200px;
+  height: 20px;
+  padding: 0.2em;
+  font-size: 14px;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+  background-color: #282C35;
+  color: $func-btn-color;
+  border: solid 2px $func-btn-color;
+  border-radius: 3px;
+  transition: .3s;
+}
+
+.func-btn:hover {
+  background: $func-btn-color;
+  color: #282C35;
+}
+
+.tag-btn {
+  margin: 5px;
+  // width: 200px;
+  height: 40px;
+  font-size: 20px;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+  background-color: #282C35;
+  color: $tag-btn-color;
+  border: solid 2px $tag-btn-color;
+  border-radius: 3px;
+  transition: .3s;
+}
+
+.tag-btn:hover {
+  background: $tag-btn-color;
+  color: #282C35;
+}
+
+textarea {
+  min-width: 250px;
+  max-width: 1100px;
+  min-height: 100px;
+  max-height: 600px;
+}
+
+.textarea {
+  font-size: 16px;
+  background-color: rgb(52, 54, 65);
+  color: #eee;
+}
+
+.textarea:focus {
+    box-shadow: 1px 1px 3px 1px rgb(130, 130, 130);
+    outline: none;           // ブラウザが標準で付加する線を消したいとき
+}
+
+.file-info {
+  color: #eee;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <main id="root">
+    <div class="all-page">
+      <article class="page">
+      <div class="text-container">
+      <form name="test">
+        <label class="func-btn" for="selfile">
+        ＋ファイルを選択
+        <input type="file" id="selfile" style="display:none;" onchange="$('#file_name').text($(this).val())">
+        </label>
+        <span class="file-info" id="file_name"></span>
+        <br>
+        <textarea class="textarea" id="user-text" name="txt" rows="20" cols="120" placeholder="ファイルを選択してください"></textarea>
+        <!-- <button class="func-btn" id="download">save</button> -->
+      </form>
+      </div>
+      <div class="tags-container">
+        <button class="tag-btn" val="hoge">hoge</button>
+        <button class="tag-btn" val="hoge">hoge</button>
+      </div>
+      </article>
+    </div>
+    </main>
+  </body>
+</html>
