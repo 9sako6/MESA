@@ -48,18 +48,25 @@ article, nav, section, main {
   background: #46a0e6;
   color: #282C35; }
 
-#undo_btn, #add_tag_btn {
+.xml_tag_btn {
+  background-color: #282C35;
+  color: #e646a0;
+  border-color: #e646a0; }
+
+.xml_tag_btn:hover {
+  background: #e646a0;
+  color: #282C35; }
+
+#undo_btn {
   width: 20px;
   height: 20px;
   vertical-align: middle; }
 
-textarea {
+#user_text {
   min-width: 250px;
   max-width: 1100px;
   min-height: 100px;
-  max-height: 600px; }
-
-#user_text {
+  max-height: 600px;
   font-size: 16px;
   background-color: #343641;
   color: #eee; }
@@ -73,9 +80,29 @@ textarea {
   word-wrap: break-word; }
 
 .add_tags {
+  padding: 10px;
   display: block;
   margin-top: 50px;
-  background-color: #343641; }
+  border: solid 2px #e6a046;
+  border-radius: 3px; }
+
+.table_header {
+  padding-right: 10px;
+  color: #e6a046; }
+
+#tag_name_form, #tag_sep_form {
+  resize: none;
+  font-size: 16px;
+  background-color: #343641;
+  color: #eee; }
+
+#tag_name_form:focus {
+  box-shadow: 1px 1px 3px 1px #828282;
+  outline: none; }
+
+#tag_sep_form:focus {
+  box-shadow: 1px 1px 3px 1px #828282;
+  outline: none; }
 
 input[type=checkbox] {
   display: none;
@@ -90,8 +117,19 @@ input[type=checkbox] + label:before {
 
 input[type=checkbox]:checked + label:before {
   content: "\f046";
-  color: #e6a046; }
+  color: #e646a0; }
 
 /* allow space for check mark */
+.func_btn a {
+  color: #e6a046;
+  text-decoration: none; }
+
+.func_btn a:hover {
+  color: #282C35; }
+
+footer {
+  margin-top: auto;
+  background-color: #aaa;
+  bottom: 0; }
 
 /*# sourceMappingURL=style.css.map */

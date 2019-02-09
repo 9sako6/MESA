@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>text file download</title>
+</head>
+
+<body>
+    <article>
+        <h1>a tag download attribute</h1>
+        <a id="link1" download="hello.txt" href="data:,hello">data URIs(text)</a>
+        <a id="link2" download="hello.json" href="data:,hello">data URIs(JSON)</a>
+        <a id="link3" download="hello.txt" href="#">Blob URLs(text)</a>
+        <a id="link4" download="hello.json" href="#">Blob URLs(JSON)</a>
+    </article>
+    <script type="text/javascript">
+        const data = {
+            massage: "hello",
+            detail: {
+                count: 1,
+                isError: false,
+                content: 'ワールド'
+            }
+        }
+
+        document.querySelector('#link2').addEventListener('click', (e) => {
+            e.target.href = `data:,${encodeURIComponent(JSON.stringify(data, null, 2))}`
+        })
+        document.querySelector('#link3').addEventListener('click', (e) => e.target.href = URL.createObjectURL(new Blob(['hello'], {
+            type: "text/plain"
+        })))
+        document.querySelector('#link4').addEventListener('click', (e) => e.target.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], {
+            type: "text/plain"
+        })))
+    </script>
+</body>
+
+</html>

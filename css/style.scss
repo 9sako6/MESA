@@ -26,6 +26,7 @@ article, nav, section, main {
 
 $func_btn_color: rgb(230, 160, 70);
 $tag_btn_color: rgb(70, 160, 230);
+$xml_tag_btn_color: rgb(230, 70,160);
 $undo_btn_color: rgb(230, 160, 230);
 
 .func_btn {
@@ -59,43 +60,32 @@ $undo_btn_color: rgb(230, 160, 230);
   color: #282C35;
 }
 
-#undo_btn, #add_tag_btn {
+
+.xml_tag_btn {
+  background-color: #282C35;
+  color: $xml_tag_btn_color;
+  border-color: $xml_tag_btn_color;
+}
+
+.xml_tag_btn:hover {
+  background: $xml_tag_btn_color;
+  color: #282C35;
+}
+#undo_btn {
   width: 20px;
   height: 20px;
   vertical-align: middle;
 }
-// #undo_btn {/*円の部分*/
-//   display: block;
-//   width: 30px;/*幅*/
-//   height: 30px;/*高さ*/
-//   background-color: #282C35;
-//   border: solid 2px $undo_btn_color;
-//   text-align: center;/*中央寄せ*/
-//   border-radius: 50%;/*角丸く*/
-//   transition: .3s;/*滑らかな動きに*/
-// }
-//
-// #undo_btn:hover {/*ホバー時*/
-//   box-shadow: 1px 1px 1px 1px rgba(200,200,200,.7);
-// }
-//
-// #undo_btn i {/*中央のアイコン*/
-//   color: $undo_btn_color;
-//   line-height: 30px;/*＝幅と高さ*/
-//   vertical-align: middle;
-//   font-size: 18px;/*サイズ*/
-// }
 
-textarea {
+$text_area_color: rgb(52, 54, 65);
+
+#user_text {
   min-width: 250px;
   max-width: 1100px;
   min-height: 100px;
   max-height: 600px;
-}
-
-#user_text {
   font-size: 16px;
-  background-color: rgb(52, 54, 65);
+  background-color: $text_area_color;
   color: #eee;
 }
 
@@ -111,9 +101,31 @@ textarea {
 }
 
 .add_tags {
+  padding: 10px;
   display: block;
   margin-top: 50px;
-  background-color: rgb(52, 54, 65);
+  border: solid 2px $func_btn_color;
+  border-radius: 3px;
+}
+
+.table_header {
+  padding-right: 10px;
+  color: $func_btn_color;
+}
+
+#tag_name_form, #tag_sep_form {
+  resize: none;
+  font-size: 16px;
+  background-color: $text_area_color;
+  color: #eee;
+}
+#tag_name_form:focus {
+    box-shadow: 1px 1px 3px 1px rgb(130, 130, 130);
+    outline: none;           // ブラウザが標準で付加する線を消したいとき
+}
+#tag_sep_form:focus {
+    box-shadow: 1px 1px 3px 1px rgb(130, 130, 130);
+    outline: none;           // ブラウザが標準で付加する線を消したいとき
 }
 
 // check box
@@ -131,6 +143,20 @@ input[type=checkbox] + label:before {
 }
 input[type=checkbox]:checked + label:before {
   content: "\f046";
-  color: $func_btn_color;
+  color: $xml_tag_btn_color;
 } /* allow space for check mark */
 // check box ここまで
+
+.func_btn a {
+  color: $func_btn_color;
+  text-decoration: none;
+}
+.func_btn a:hover {
+  color: #282C35;
+}
+
+footer {
+  margin-top: auto;
+  background-color: #aaa;
+  bottom: 0;
+}
