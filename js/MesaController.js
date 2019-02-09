@@ -1,7 +1,9 @@
 class MesaController {
   constructor() {
+    // init
     this.model = new MesaModel();
     this.view = new MesaView();
+    // events
     this.loadTextFile(this.model, this.view);
     this.loadJsonFile(this.model, this.view);
     this.insertTag(this.model, this.view);
@@ -103,6 +105,7 @@ class MesaController {
       var newTag = {"name":name, "sepChar":sepChar, "xmlFlag":xmlFlag};
       model.addedTagListJson.push(newTag);
       view.makeTagButton([newTag]);
+      view.showAddedMsg(newTag);
     });
   }
 
@@ -119,11 +122,6 @@ class MesaController {
     document.querySelector('#text-donwload').addEventListener('click', (e) => e.target.href = URL.createObjectURL(new Blob([document.getElementById('user-text').value], {
         type: "text/plain"
     })))
-    // $('#text-download').on('click', function(evt) {
-    //   evt.target.href = URL.createObjectURL(
-    //     new Blob([document.getElementById('user-text').value],{ type: "text/plain" })
-    //   )
-    // })
   }
 
   downloadJson(model, view) {

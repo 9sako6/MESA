@@ -19,4 +19,15 @@ class MesaView {
     }
     $('#tags').append(addElem);
   }
+
+  hideAddedMsg() {
+    $('#added-message').hide();
+  }
+
+  showAddedMsg(tagInfoDic) {
+    $('#added-message').append("")
+    document.getElementById("added-message").innerText = '"' + tagInfoDic.name + '"' + " was added.";
+    $('#added-message').show();
+    $('#added-message').fadeOut(1500);
+  }
 }
