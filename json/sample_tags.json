@@ -1,5 +1,5 @@
 [
-  {"name":"taro", "sep_char":"\t", "xml_or_not":false},
-  {"name":"hanako", "sep_char":",", "xml_or_not":false},
-  {"name":"kokeko", "sep_char":"\t", "xml_or_not":true}
+  {"name":"taro", "sepChar":"\t", "xmlFlag":false},
+  {"name":"hanako", "sepChar":",", "xmlFlag":false},
+  {"name":"kokeko", "sepChar":"\t", "xmlFlag":true}
 ]

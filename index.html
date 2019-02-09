@@ -1,70 +1,77 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script type="text/javascript" src="./js/main.js"></script>
+  <meta charset="utf-8">
+  <title>Annotation -MESA-</title>
   <link rel="stylesheet" href="./css/style.css">
   <!-- fontawesome -->
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-  <meta charset="utf-8">
-  <title>Annotation -MESA-</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- <script type="text/javascript" src="./js/main.js"></script> -->
+  <script type="text/javascript" src="js/MesaModel.js"></script>
+  <script type="text/javascript" src="js/MesaView.js"></script>
+  <script type="text/javascript" src="js/MesaController.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      new MesaController();
+    });
+  </script>
 </head>
 
 <body>
   <main id="root">
-    <div class="all_page">
+    <div class="all-page">
       <article class="page">
-        <div class="text_container">
+        <div class="text-container">
           <form>
-            <label class="func_btn" for="upload_button">
+            <label class="func-btn" for="upload-button">
               +ファイルを選択
-              <input type="file" id="upload_button" style="display:none;" onchange="$('#file_name').text($(this).val().split('\\').pop())">
+              <input type="file" id="upload-button" style="display:none;" onchange="$('#file-name').text($(this).val().split('\\').pop())">
             </label>
-            <span class="file_info" id="file_name"></span>
+            <span class="file-info" id="file-name"></span>
             <br>
-            <textarea id="user_text" name="txt" rows="20" cols="120" placeholder="ファイルを選択してください"></textarea>
+            <textarea id="user-text" name="txt" rows="20" cols="120" placeholder="ファイルを選択してください"></textarea>
             <br>
-            <div class="func_btn"><a id="text_donwload" download="mesa_file.txt" href="#">↓ファイルを保存</a></div>
+            <div class="func-btn"><a id="text-donwload" download="mesa_file.txt" href="#">↓ファイルを保存</a></div>
           </form>
         </div>
-        <div class="tags_container">
+        <div class="tags-container">
           <!-- load tags -->
-          <div class"load_tags">
-            <label class="func_btn" for="load_tags_button">
+          <div class="load-tags">
+            <label class="func-btn" for="load-tags-button">
             +タグの読み込み
-            <input type="file" id="load_tags_button" style="display:none;" onchange="$('#tag_file_name').text($(this).val().split('\\').pop())">
+            <input type="file" id="load-tags-button" style="display:none;" onchange="$('#tag-file-name').text($(this).val().split('\\').pop())">
           </label>
-            <span class="file_info" id="tag_file_name"></span>
+            <span class="file-info" id="tag-file-name"></span>
             <br>
-            <div class="func_btn" id="undo_btn">←</div>
+            <div class="func-btn" id="undo-btn">←</div>
           </div>
           <!-- tags -->
           <div id="tags">
-            <div class="func_btn tag_btn" val="&#009;hoge">hoge</div>
-            <div class="func_btn tag_btn" val="&#009;huga">huga</div>
+            <div class="func-btn tag-btn" val="&#009;hoge">hoge</div>
+            <div class="func-btn tag-btn" val="&#009;huga">huga</div>
           </div>
-          <div class="func_btn"><a id="json_donwload" download="mesa_tags.json" href="#">↓タグを保存</a></div>
+          <div class="func-btn"><a id="json-donwload" download="mesa_tags.json" href="#">↓タグを保存</a></div>
           <!-- add tags -->
-          <div class="add_tags">
+          <div class="add-tags">
             <table>
               <tr>
-                <td class="table_header">名前</td>
-                <td><textarea id="tag_name_form" rows="1" cols="18"></textarea></td>
+                <td class="table-header">名前</td>
+                <td><textarea id="tag-name-form" rows="1" cols="18"></textarea></td>
               </tr>
               <tr>
-                <td class="table_header">区切り文字</td>
-                <td><textarea id="tag_sep_form" rows="1" cols="18" placeholder="XML tagでない場合のみ"></textarea></td>
+                <td class="table-header">区切り文字</td>
+                <td><textarea id="tag-sep-form" rows="1" cols="18" placeholder="XML tagでない場合のみ"></textarea></td>
               </tr>
               <tr>
-                <td class="table_header">XML tag</td>
+                <td class="table-header">XML tag</td>
                 <td>
-                  <input id="xml_or_not" type="checkbox">
-                  <label for="xml_or_not"></label>
+                  <input id="xml-flag" type="checkbox">
+                  <label for="xml-flag"></label>
                 </td>
               </tr>
             </table>
-            <div class="func_btn" id="add_tag_btn">+タグの追加</div><br>
+            <div class="func-btn" id="add-tag-btn">+タグの追加</div><br>
         </div>
         </div>
       </article>

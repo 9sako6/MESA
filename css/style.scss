@@ -14,22 +14,22 @@ article, nav, section, main {
   flex-wrap: wrap
 }
 
-.text_container {
+.text-container {
   margin-left: 50px;
 }
 
-.tags_container {
+.tags-container {
   margin-left: 50px;
   display: block;
   max-width: 300px;
 }
 
-$func_btn_color: rgb(230, 160, 70);
-$tag_btn_color: rgb(70, 160, 230);
-$xml_tag_btn_color: rgb(230, 70,160);
-$undo_btn_color: rgb(230, 160, 230);
+$func-btn-color: rgb(230, 160, 70);
+$tag-btn-color: rgb(70, 160, 230);
+$xml-tag-btn-color: rgb(230, 70,160);
+$undo-btn-color: rgb(230, 160, 230);
 
-.func_btn {
+.func-btn {
   margin: 5px;
   height: 20px;
   padding: 0.2em;
@@ -38,92 +38,92 @@ $undo_btn_color: rgb(230, 160, 230);
   display: inline-block;
   text-decoration: none;
   background-color: #282C35;
-  color: $func_btn_color;
-  border: solid 2px $func_btn_color;
+  color: $func-btn-color;
+  border: solid 2px $func-btn-color;
   border-radius: 3px;
   transition: .3s;
 }
 
-.func_btn:hover {
-  background: $func_btn_color;
+.func-btn:hover {
+  background: $func-btn-color;
   color: #282C35;
 }
 
-.tag_btn {
+.tag-btn {
   background-color: #282C35;
-  color: $tag_btn_color;
-  border-color: $tag_btn_color;
+  color: $tag-btn-color;
+  border-color: $tag-btn-color;
 }
 
-.tag_btn:hover {
-  background: $tag_btn_color;
+.tag-btn:hover {
+  background: $tag-btn-color;
   color: #282C35;
 }
 
 
-.xml_tag_btn {
+.xml-tag-btn {
   background-color: #282C35;
-  color: $xml_tag_btn_color;
-  border-color: $xml_tag_btn_color;
+  color: $xml-tag-btn-color;
+  border-color: $xml-tag-btn-color;
 }
 
-.xml_tag_btn:hover {
-  background: $xml_tag_btn_color;
+.xml-tag-btn:hover {
+  background: $xml-tag-btn-color;
   color: #282C35;
 }
-#undo_btn {
+#undo-btn {
   width: 20px;
   height: 20px;
   vertical-align: middle;
 }
 
-$text_area_color: rgb(52, 54, 65);
+$text-area-color: rgb(52, 54, 65);
 
-#user_text {
+#user-text {
   min-width: 250px;
   max-width: 1100px;
   min-height: 100px;
   max-height: 600px;
   font-size: 16px;
-  background-color: $text_area_color;
+  background-color: $text-area-color;
   color: #eee;
 }
 
-#user_text:focus {
+#user-text:focus {
     box-shadow: 1px 1px 3px 1px rgb(130, 130, 130);
     outline: none;           // ブラウザが標準で付加する線を消したいとき
 }
 
 
-.file_info {
+.file-info {
   color: #eee;
   word-wrap: break-word;
 }
 
-.add_tags {
+.add-tags {
   padding: 10px;
   display: block;
   margin-top: 50px;
-  border: solid 2px $func_btn_color;
+  border: solid 2px $func-btn-color;
   border-radius: 3px;
 }
 
-.table_header {
+.table-header {
   padding-right: 10px;
-  color: $func_btn_color;
+  color: $func-btn-color;
 }
 
-#tag_name_form, #tag_sep_form {
+#tag-name-form, #tag-sep-form {
   resize: none;
   font-size: 16px;
-  background-color: $text_area_color;
+  background-color: $text-area-color;
   color: #eee;
 }
-#tag_name_form:focus {
+#tag-name-form:focus {
     box-shadow: 1px 1px 3px 1px rgb(130, 130, 130);
     outline: none;           // ブラウザが標準で付加する線を消したいとき
 }
-#tag_sep_form:focus {
+#tag-sep-form:focus {
     box-shadow: 1px 1px 3px 1px rgb(130, 130, 130);
     outline: none;           // ブラウザが標準で付加する線を消したいとき
 }
@@ -143,15 +143,15 @@ input[type=checkbox] + label:before {
 }
 input[type=checkbox]:checked + label:before {
   content: "\f046";
-  color: $xml_tag_btn_color;
+  color: $xml-tag-btn-color;
 } /* allow space for check mark */
 // check box ここまで
 
-.func_btn a {
-  color: $func_btn_color;
+.func-btn a {
+  color: $func-btn-color;
   text-decoration: none;
 }
-.func_btn a:hover {
+.func-btn a:hover {
   color: #282C35;
 }
 
