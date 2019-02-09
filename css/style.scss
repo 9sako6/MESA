@@ -14,21 +14,22 @@ article, nav, section, main {
   flex-wrap: wrap
 }
 
-.text-container {
+.text_container {
   margin-left: 50px;
 }
 
-.tags-container {
+.tags_container {
   margin-left: 50px;
   display: block;
+  max-width: 300px;
 }
 
-$func-btn-color: rgb(230, 160, 70);
-$tag-btn-color: rgb(70, 160, 230);
+$func_btn_color: rgb(230, 160, 70);
+$tag_btn_color: rgb(70, 160, 230);
+$undo_btn_color: rgb(230, 160, 230);
 
-.func-btn {
+.func_btn {
   margin: 5px;
-  // width: 200px;
   height: 20px;
   padding: 0.2em;
   font-size: 14px;
@@ -36,36 +37,54 @@ $tag-btn-color: rgb(70, 160, 230);
   display: inline-block;
   text-decoration: none;
   background-color: #282C35;
-  color: $func-btn-color;
-  border: solid 2px $func-btn-color;
+  color: $func_btn_color;
+  border: solid 2px $func_btn_color;
   border-radius: 3px;
   transition: .3s;
 }
 
-.func-btn:hover {
-  background: $func-btn-color;
+.func_btn:hover {
+  background: $func_btn_color;
   color: #282C35;
 }
 
-.tag-btn {
-  margin: 5px;
-  // width: 200px;
-  height: 40px;
-  font-size: 20px;
-  text-align: center;
-  display: inline-block;
-  text-decoration: none;
+.tag_btn {
   background-color: #282C35;
-  color: $tag-btn-color;
-  border: solid 2px $tag-btn-color;
-  border-radius: 3px;
-  transition: .3s;
+  color: $tag_btn_color;
+  border-color: $tag_btn_color;
 }
 
-.tag-btn:hover {
-  background: $tag-btn-color;
+.tag_btn:hover {
+  background: $tag_btn_color;
   color: #282C35;
 }
+
+#undo_btn, #add_tag_btn {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+// #undo_btn {/*円の部分*/
+//   display: block;
+//   width: 30px;/*幅*/
+//   height: 30px;/*高さ*/
+//   background-color: #282C35;
+//   border: solid 2px $undo_btn_color;
+//   text-align: center;/*中央寄せ*/
+//   border-radius: 50%;/*角丸く*/
+//   transition: .3s;/*滑らかな動きに*/
+// }
+//
+// #undo_btn:hover {/*ホバー時*/
+//   box-shadow: 1px 1px 1px 1px rgba(200,200,200,.7);
+// }
+//
+// #undo_btn i {/*中央のアイコン*/
+//   color: $undo_btn_color;
+//   line-height: 30px;/*＝幅と高さ*/
+//   vertical-align: middle;
+//   font-size: 18px;/*サイズ*/
+// }
 
 textarea {
   min-width: 250px;
@@ -74,17 +93,44 @@ textarea {
   max-height: 600px;
 }
 
-.textarea {
+#user_text {
   font-size: 16px;
   background-color: rgb(52, 54, 65);
   color: #eee;
 }
 
-.textarea:focus {
+#user_text:focus {
     box-shadow: 1px 1px 3px 1px rgb(130, 130, 130);
     outline: none;           // ブラウザが標準で付加する線を消したいとき
 }
 
-.file-info {
+
+.file_info {
+  color: #eee;
+  word-wrap: break-word;
+}
+
+.add_tags {
+  display: block;
+  margin-top: 50px;
+  background-color: rgb(52, 54, 65);
+}
+
+// check box
+@import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+input[type=checkbox] {
+  display:none;/* to hide the checkbox itself */
   color: #eee;
 }
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  color: #eee;
+  content: "\f096";
+}
+input[type=checkbox]:checked + label:before {
+  content: "\f046";
+  color: $func_btn_color;
+} /* allow space for check mark */
+// check box ここまで

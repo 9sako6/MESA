@@ -1,3 +1,4 @@
+@import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 html, body {
   margin: 0;
   padding: 0;
@@ -12,14 +13,15 @@ article, nav, section, main {
   height: 100%;
   flex-wrap: wrap; }
 
-.text-container {
+.text_container {
   margin-left: 50px; }
 
-.tags-container {
+.tags_container {
   margin-left: 50px;
-  display: block; }
+  display: block;
+  max-width: 300px; }
 
-.func-btn {
+.func_btn {
   margin: 5px;
   height: 20px;
   padding: 0.2em;
@@ -33,26 +35,23 @@ article, nav, section, main {
   border-radius: 3px;
   transition: .3s; }
 
-.func-btn:hover {
+.func_btn:hover {
   background: #e6a046;
   color: #282C35; }
 
-.tag-btn {
-  margin: 5px;
-  height: 40px;
-  font-size: 20px;
-  text-align: center;
-  display: inline-block;
-  text-decoration: none;
+.tag_btn {
   background-color: #282C35;
   color: #46a0e6;
-  border: solid 2px #46a0e6;
-  border-radius: 3px;
-  transition: .3s; }
+  border-color: #46a0e6; }
 
-.tag-btn:hover {
+.tag_btn:hover {
   background: #46a0e6;
   color: #282C35; }
+
+#undo_btn, #add_tag_btn {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle; }
 
 textarea {
   min-width: 250px;
@@ -60,16 +59,39 @@ textarea {
   min-height: 100px;
   max-height: 600px; }
 
-.textarea {
+#user_text {
   font-size: 16px;
   background-color: #343641;
   color: #eee; }
 
-.textarea:focus {
+#user_text:focus {
   box-shadow: 1px 1px 3px 1px #828282;
   outline: none; }
 
-.file-info {
+.file_info {
+  color: #eee;
+  word-wrap: break-word; }
+
+.add_tags {
+  display: block;
+  margin-top: 50px;
+  background-color: #343641; }
+
+input[type=checkbox] {
+  display: none;
+  /* to hide the checkbox itself */
   color: #eee; }
+
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  color: #eee;
+  content: "\f096"; }
+
+input[type=checkbox]:checked + label:before {
+  content: "\f046";
+  color: #e6a046; }
+
+/* allow space for check mark */
 
 /*# sourceMappingURL=style.css.map */

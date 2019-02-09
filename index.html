@@ -4,27 +4,51 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
     <link rel="stylesheet" href="./css/style.css">
+    <!-- fontawesome -->
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <meta charset="utf-8">
   </head>
   <body>
     <main id="root">
-    <div class="all-page">
+    <div class="all_page">
       <article class="page">
-      <div class="text-container">
-      <form name="test">
-        <label class="func-btn" for="selfile">
+      <div class="text_container">
+      <form>
+        <label class="func_btn" for="upload_button">
         ＋ファイルを選択
-        <input type="file" id="selfile" style="display:none;" onchange="$('#file_name').text($(this).val())">
+        <input type="file" id="upload_button" style="display:none;" onchange="$('#file_name').text($(this).val().split('\\').pop())">
         </label>
-        <span class="file-info" id="file_name"></span>
+        <span class="file_info" id="file_name"></span>
         <br>
-        <textarea class="textarea" id="user-text" name="txt" rows="20" cols="120" placeholder="ファイルを選択してください"></textarea>
-        <!-- <button class="func-btn" id="download">save</button> -->
+        <textarea id="user_text" name="txt" rows="20" cols="120" placeholder="ファイルを選択してください"></textarea>
+        <!-- <button class="func_btn" id="download">save</button> -->
       </form>
       </div>
-      <div class="tags-container">
-        <button class="tag-btn" val="hoge">hoge</button>
-        <button class="tag-btn" val="hoge">hoge</button>
+      <div class="tags_container">
+        <!-- load tags -->
+        <div class"load_tags">
+          <label class="func_btn" for="load_tags_button">
+            ＋タグの読み込み
+            <input type="file" id="load_tags_button" style="display:none;" onchange="$('#tag_file_name').text($(this).val().split('\\').pop())">
+          </label>
+          <span class="file_info" id="tag_file_name"></span>
+          <br>
+          <div class="func_btn" id="undo_btn">←</div>
+        </div>
+        <!-- tags -->
+        <div id="tags">
+          <div class="func_btn tag_btn" val="hoge">hoge</div>
+          <div class="func_btn tag_btn" val="huga">huga</div>
+        </div>
+        <!-- add tags -->
+        <div class="add_tags">
+
+          <span>Name:</span><input type="text"><br>
+          <span>Value:</span><input type="text"><br>
+          <input id="xml_or_not" type="checkbox">
+          XML tag<label for="xml_or_not"></label><br>
+          <div class="func_btn" id="add_tag_btn">+</div><br>
+        </div>
       </div>
       </article>
     </div>
