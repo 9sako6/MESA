@@ -9,7 +9,6 @@ class MesaController {
     this.insertTag(this.model, this.view);
     this.insertXMLTag(this.model, this.view);
     this.addTag(this.model, this.view);
-    this.undo(this.model, this.view);
     this.downloadText(this.model, this.view);
     this.downloadJson(this.model, this.view);
   }
@@ -86,14 +85,6 @@ class MesaController {
       model.addedTagListJson.push(newTag);
       view.makeTagButton([newTag]);
       view.showAddedMsg(newTag);
-    });
-  }
-
-  undo(model, view) {
-    // undo(1回前の内容を保存しておいて戻す)
-    $('#undo-btn').on('click', function() {
-      var textarea = document.getElementById('text-editor');
-      textarea.value = model.textHistory;
     });
   }
 

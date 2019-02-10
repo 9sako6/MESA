@@ -24,11 +24,11 @@
       <article class="page">
         <div class="text-container">
           <form>
-          <label class="func-btn" for="upload-button">
+            <label class="func-btn" for="upload-button">
             +Upload
             <input type="file" id="upload-button" style="display:none;" onchange="$('#file-name').text($(this).val().split('\\').pop())">
           </label>
-          <span class="file-info" id="file-name"></span>
+            <span class="file-info" id="file-name"></span>
           </form>
           <!-- ace editor -->
           <div id="text-editor"></div>
@@ -55,13 +55,9 @@
                     <input type="file" id="load-tags-button" style="display:none;" onchange="$('#tag-file-name').text($(this).val().split('\\').pop())">
                   </label>
                     <span class="file-info" id="tag-file-name"></span>
-                    <!-- <br> -->
-                    <!-- <div class="func-btn" id="undo-btn">←</div> -->
                   </div>
                   <!-- tags -->
                   <div id="tags">
-                    <!-- <div class="func-btn tag-btn" val="&#009;hoge">hoge</div>
-                    <div class="func-btn tag-btn" val="&#009;huga">huga</div> -->
                   </div>
                   <div class="func-btn"><a id="json-donwload" download="mesa_tags.json" href="#">↓Save Tags (JSON)</a></div>
                 </div>
@@ -92,16 +88,14 @@
                     </table>
                     <div class="func-btn" id="add-tag-btn">+Add Tag</div>
                     <div id="added-message"></div>
-                </div>
+                  </div>
                 </div>
               </div>
             </div>
-            </div>
           </div>
-
-
         </div>
-      </article>
+    </div>
+    </article>
     </div>
   </main>
   <footer>Copyright 2019 - 9sako6</footer>
