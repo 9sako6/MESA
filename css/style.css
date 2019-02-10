@@ -59,8 +59,8 @@ article, nav, section, main {
   color: #2c3134; }
 
 #text-editor {
-  width: 900px;
-  height: 500px; }
+  width: 70vw;
+  height: 80vh; }
 
 .file-info {
   color: #eee;
