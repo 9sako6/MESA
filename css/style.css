@@ -22,6 +22,28 @@ article, nav, section, main {
   display: block;
   max-width: 30%; }
 
+.file-info {
+  color: #eee;
+  word-wrap: break-word; }
+
+.table-header {
+  padding-right: 10px;
+  color: #e6a046; }
+
+#added-message {
+  padding: 1em;
+  color: #5c6869; }
+
+footer {
+  text-align: center;
+  position: absolute;
+  top: 97%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  color: rgba(77, 77, 77, 0.7);
+  margin-bottom: 1em; }
+
 .func-btn {
   margin: 5px;
   height: 20px;
@@ -58,23 +80,6 @@ article, nav, section, main {
   background: #e646a0;
   color: #2c3134; }
 
-#text-editor {
-  width: 70vw;
-  height: 80vh; }
-
-.file-info {
-  color: #eee;
-  word-wrap: break-word; }
-
-.add-tags {
-  padding: 10px;
-  display: block;
-  border-radius: 3px; }
-
-.table-header {
-  padding-right: 10px;
-  color: #e6a046; }
-
 input[type=checkbox] {
   display: none;
   /* to hide the checkbox itself */
@@ -98,37 +103,10 @@ input[type=checkbox]:checked + label:before {
 .func-btn a:hover {
   color: #2c3134; }
 
-#added-message {
-  padding: 1em;
-  color: #5c6869; }
-
-#download-filename,
-#download-jsonname,
-#tag-name-form,
-#tag-sep-form {
-  display: table-cell;
-  vertical-align: middle;
-  height: 20px;
-  font-size: 14px;
-  background-color: #272721;
-  color: #eee; }
-
-#download-filename:focus,
-#download-jsonname:focus,
-#tag-name-form:focus,
-#tag-sep-form:focus {
-  box-shadow: 1px 1px 3px 1px #828282;
-  outline: none; }
-
-footer {
-  text-align: center;
-  position: absolute;
-  top: 97%;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  color: rgba(77, 77, 77, 0.7);
-  margin-bottom: 1em; }
+.add-tags {
+  padding: 10px;
+  display: block;
+  border-radius: 3px; }
 
 .tabs {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -173,5 +151,34 @@ input[name="tab_item"] {
 .tabs input:checked + .tab_item {
   background-color: #e6a046;
   color: #2c3134; }
+
+#download-filename,
+#download-jsonname,
+#tag-name-form,
+#tag-sep-form {
+  resize: none;
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 14px;
+  background-color: #272721;
+  color: #eee; }
+
+#download-filename:focus,
+#download-jsonname:focus,
+#tag-name-form:focus,
+#tag-sep-form:focus {
+  box-shadow: 1px 1px 3px 1px #828282;
+  outline: none; }
+
+#text-editor {
+  width: 70vw;
+  height: 80vh; }
+
+#download-filename {
+  width: 20vw; }
+
+#tag-name-form,
+#tag-sep-form {
+  width: 15vw; }
 
 /*# sourceMappingURL=style.css.map */

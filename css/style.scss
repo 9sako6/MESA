@@ -26,132 +26,19 @@ article, nav, section, main {
   max-width: 30%;
 }
 
-$func-btn-color: rgb(230, 160, 70);
-$tag-btn-color: rgb(70, 160, 230);
-$xml-tag-btn-color: rgb(230, 70,160);
-$undo-btn-color: rgb(230, 160, 230);
-
-.func-btn {
-  margin: 5px;
-  height: 20px;
-  padding: 0.2em;
-  font-size: 14px;
-  text-align: center;
-  display: inline-block;
-  text-decoration: none;
-  background-color: $base-color;
-  color: $func-btn-color;
-  border: solid 2px $func-btn-color;
-  border-radius: 3px;
-  transition: .3s;
-}
-
-.func-btn:hover {
-  background: $func-btn-color;
-  color: $base-color;
-}
-
-.tag-btn {
-  background-color: $base-color;
-  color: $tag-btn-color;
-  border-color: $tag-btn-color;
-}
-
-.tag-btn:hover {
-  background: $tag-btn-color;
-  color: $base-color;
-}
-
-.xml-tag-btn {
-  background-color: $base-color;
-  color: $xml-tag-btn-color;
-  border-color: $xml-tag-btn-color;
-}
-
-.xml-tag-btn:hover {
-  background: $xml-tag-btn-color;
-  color: $base-color;
-}
-
-
-$text-area-color: rgb(52, 54, 65);
-
-#text-editor {
-  width: 70vw;
-  height: 80vh;
-  // height: 500px;
-}
-
 .file-info {
   color: #eee;
   word-wrap: break-word;
 }
 
-.add-tags {
-  padding: 10px;
-  display: block;
-  // margin-top: 50px;
-  // border: solid 2px $func-btn-color;
-  border-radius: 3px;
-}
-
 .table-header {
   padding-right: 10px;
-  color: $func-btn-color;
-}
-
-// check box
-@import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-
-input[type=checkbox] {
-  display:none;/* to hide the checkbox itself */
-  color: #eee;
-}
-input[type=checkbox] + label:before {
-  font-family: FontAwesome;
-  display: inline-block;
-  color: #eee;
-  content: "\f096";
-}
-input[type=checkbox]:checked + label:before {
-  content: "\f046";
-  color: $xml-tag-btn-color;
-} /* allow space for check mark */
-// check box
-
-.func-btn a {
-  color: $func-btn-color;
-  text-decoration: none;
-}
-.func-btn a:hover {
-  color: $base-color;
+  color: rgb(230, 160, 70);
 }
 
 #added-message {
   padding: 1em;
   color: rgb(92, 104, 105);
-}
-
-$text-area-color: #272721;
-
-#download-filename,
-#download-jsonname,
-#tag-name-form,
-#tag-sep-form {
-  display: table-cell;
-  vertical-align: middle;
-  height: 20px;
-  font-size: 14px;
-  background-color: $text-area-color;
-  color: #eee;
-}
-
-#download-filename:focus,
-#download-jsonname:focus,
-#tag-name-form:focus,
-#tag-sep-form:focus {
-    box-shadow: 1px 1px 3px 1px rgb(130, 130, 130);
-    outline: none; // ブラウザが標準で付加する線を消したいとき
 }
 
 footer {
@@ -165,4 +52,6 @@ footer {
   margin-bottom: 1em;
 }
 
-@import "tab";
+@import "buttons";
+@import "tabs";
+@import "forms";

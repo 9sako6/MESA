@@ -1,5 +1,0 @@
-[
-  {"name":"taro", "sepChar":"\t", "xmlFlag":false},
-  {"name":"hanako", "sepChar":",", "xmlFlag":false},
-  {"name":"kokeko", "sepChar":"\t", "xmlFlag":true}
-]

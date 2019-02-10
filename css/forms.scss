@@ -1,0 +1,36 @@
+$text-area-color: #272721;
+
+#download-filename,
+#download-jsonname,
+#tag-name-form,
+#tag-sep-form {
+  resize: none;
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 14px;
+  background-color: $text-area-color;
+  color: #eee;
+}
+
+#download-filename:focus,
+#download-jsonname:focus,
+#tag-name-form:focus,
+#tag-sep-form:focus {
+    box-shadow: 1px 1px 3px 1px rgb(130, 130, 130);
+    outline: none; // ブラウザが標準で付加する線を消したいとき
+}
+
+#text-editor {
+  width: 70vw;
+  height: 80vh;
+  // height: 500px;
+}
+
+#download-filename {
+  width: 20vw;
+}
+
+#tag-name-form,
+#tag-sep-form {
+  width: 15vw;
+}

@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
   <meta charset="utf-8">
+  <!-- service worker -->
   <script>
   // (source: https://github.com/nwtgck/nipp/blob/develop/index.html)
   // Register server-worker.js when service worker is available
@@ -14,12 +15,13 @@
     });
   }
   </script>
+
   <title>Annotation -MESA-</title>
   <link rel="icon" href="./favicon.ico">
   <link rel="stylesheet" href="./css/style.css">
   <!-- fontawesome -->
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-
+  <!-- jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <script type="text/javascript" src="./js/MesaModel.js"></script>
@@ -56,7 +58,7 @@
                 <div class="func-btn"><a id="text-donwload" download="mesa_file.txt" href="#">↓Save</a></div>
               </td>
               <td>
-                <textarea id="download-filename" rows="1" cols="16" placeholder="Enter a file name"></textarea>
+                <textarea id="download-filename" rows="1" placeholder="Enter a file name"></textarea>
               </td>
             </tr>
           </table>
@@ -111,11 +113,11 @@
                     <table>
                       <tr>
                         <td class="table-header">Name</td>
-                        <td><textarea id="tag-name-form" rows="1" cols="18"></textarea></td>
+                        <td><textarea id="tag-name-form" rows="1""></textarea></td>
                       </tr>
                       <tr>
                         <td class="table-header">Separator</td>
-                        <td><textarea id="tag-sep-form" rows="1" cols="18" placeholder="If you need ..."></textarea></td>
+                        <td><textarea id="tag-sep-form" rows="1"" placeholder="If you need ..."></textarea></td>
                       </tr>
                       <tr>
                         <td class="table-header">XML Tag</td>
