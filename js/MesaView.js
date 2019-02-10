@@ -7,7 +7,6 @@ class MesaView {
     model.editor.session.setValue(text);
   }
 
-  // 読み込んだjsonを元にタグボタンを作る
   makeTagButton(json) {
     var addElem = ""
     for (let tag of json) {
@@ -17,6 +16,7 @@ class MesaView {
         addElem += '<div class="func-btn tag-btn" val="' + tag.sepChar + tag.name + '">' + tag.name + '</div>';
       }
     }
+    // add buttons
     $('#tags').append(addElem);
   }
 

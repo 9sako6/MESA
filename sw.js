@@ -5,7 +5,14 @@ const CACHE_NAME = '2019219-01';
 // TODO: Hard code
 const CACHE_FILE = [
   './',
-  './index.html'
+  './index.html',
+  './favicon.ico',
+  // ace editor
+  "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.0/ace.js",
+  // jquery
+  "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js",
+  // fontawesome
+  "https://use.fontawesome.com/releases/v5.6.1/css/all.css"
 ];
 
 self.addEventListener('install', function(e) {

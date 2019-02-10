@@ -11,38 +11,37 @@ class MesaController {
     this.addTag(this.model, this.view);
     this.downloadText(this.model, this.view);
     this.downloadJson(this.model, this.view);
+    //
+    this.alertWhenReload();
   }
 
   loadTextFile(model, view) {
     $('#upload-button').on('change', function(evt) {
       var file = evt.target.files;
-      // FileReaderの作成
+      // make FileReader
       var reader = new FileReader();
-      // テキスト形式で読み込む
       reader.readAsText(file[0]);
-      // 読込終了後の処理
+      // process after loading
       reader.onload = function() {
         view.writeTextArea(reader.result, model);
       }
     });
   }
 
-  // JSONの読み込み（load-tags-buttonボタンが押されたら）
   loadJsonFile(model, view) {
     $('#load-tags-button').on('change', function(evt) {
       var file = evt.target.files;
-      // FileReaderの作成
+      // make FileReader
       var reader = new FileReader();
-      // テキスト形式で読み込む
       reader.readAsText(file[0]);
-      // 読込終了後の処理
+      // process after loading
       reader.onload = function() {
-        // modelにjson保持
+        // save json in model
         var json = JSON.parse(reader.result)
         if (json) {
           model.tagListJson = json;
         }
-        // tagボタンを作る
+        //
         view.makeTagButton(model.tagListJson);
       }
     });
@@ -90,6 +89,7 @@ class MesaController {
         "sepChar": sepChar,
         "xmlFlag": xmlFlag
       };
+      // save tags added by user in model
       model.addedTagListJson.push(newTag);
       view.makeTagButton([newTag]);
       view.showAddedMsg(newTag);
@@ -108,6 +108,12 @@ class MesaController {
     document.querySelector('#json-donwload').addEventListener('click', (e) => e.target.href = URL.createObjectURL(new Blob([JSON.stringify(model.tagListJson.concat(model.addedTagListJson), null, 2)], {
       type: "text/plain"
     })))
+  }
 
+  alertWhenReload() {
+    $(window).on('beforeunload', function(e) {
+      var msg = "Data will be lost if you leave the page, are you sure?";
+      return msg;
+    });
   }
 }
