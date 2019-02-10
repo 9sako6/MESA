@@ -1,7 +1,7 @@
 // (source: https://github.com/nwtgck/nipp/blob/develop/service-worker.js)
 // (from: https://murashun.jp/blog/20171210-01.html)
 
-const CACHE_NAME = '2019219-01';
+const CACHE_NAME = 'MESA_2019_01';
 // TODO: Hard code
 const CACHE_FILE = [
   './',
