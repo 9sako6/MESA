@@ -98,16 +98,31 @@ class MesaController {
 
   downloadText(model, view) {
     // download text file
-    document.querySelector('#text-donwload').addEventListener('click', (e) => e.target.href = URL.createObjectURL(new Blob([model.editor.session.getValue()], {
-        type: "text/plain"
-    })))
+    document.querySelector('#text-donwload')
+    .addEventListener('click', (e) => {
+      // url
+      e.target.href = URL.createObjectURL(
+        new Blob([model.editor.session.getValue()],
+        { type: "text/plain" })
+      )
+      // filename
+      var filename = $('#download-filename').val() || "mesa_file.txt";
+      e.target.download = filename;
+    })
   }
 
   downloadJson(model, view) {
     //download json file
-    document.querySelector('#json-donwload').addEventListener('click', (e) => e.target.href = URL.createObjectURL(new Blob([JSON.stringify(model.tagListJson.concat(model.addedTagListJson), null, 2)], {
-      type: "text/plain"
-    })))
+    document.querySelector('#json-donwload')
+    .addEventListener('click', (e) => {
+      // url
+      e.target.href = URL.createObjectURL(new Blob([JSON.stringify(model.tagListJson.concat(model.addedTagListJson), null, 2)],
+      { type: "text/plain" })
+      )
+      // filename
+      var filename = $('#download-jsonname').val() || "mesa_tags";
+      e.target.download = filename + ".json";
+    })
   }
 
   alertWhenReload() {
