@@ -55,7 +55,11 @@ class MesaController {
       var selections = model.editor.getSelection().getAllRanges();
       // insert all positions
       for (let selection of selections) {
-        model.editor.session.insert(selection.cursor, insertString);
+        if (selection.cursor) {
+          model.editor.session.insert(selection.cursor, insertString);
+        } else {
+          model.editor.session.insert(selection.end, insertString);
+        }
       }
     });
   }
@@ -81,7 +85,11 @@ class MesaController {
       var name = document.getElementById('tag-name-form').value || "name";
       var sepChar = document.getElementById('tag-sep-form').value || "\t";
       var xmlFlag = document.getElementById('xml-flag').checked;
-      var newTag = {"name":name, "sepChar":sepChar, "xmlFlag":xmlFlag};
+      var newTag = {
+        "name": name,
+        "sepChar": sepChar,
+        "xmlFlag": xmlFlag
+      };
       model.addedTagListJson.push(newTag);
       view.makeTagButton([newTag]);
       view.showAddedMsg(newTag);
@@ -89,8 +97,8 @@ class MesaController {
   }
 
   downloadText(model, view) {
-    //download text file
-    document.querySelector('#text-donwload').addEventListener('click', (e) => e.target.href = URL.createObjectURL(new Blob([document.getElementById('text-editor').value], {
+    // download text file
+    document.querySelector('#text-donwload').addEventListener('click', (e) => e.target.href = URL.createObjectURL(new Blob([model.editor.session.getValue()], {
         type: "text/plain"
     })))
   }
@@ -98,7 +106,7 @@ class MesaController {
   downloadJson(model, view) {
     //download json file
     document.querySelector('#json-donwload').addEventListener('click', (e) => e.target.href = URL.createObjectURL(new Blob([JSON.stringify(model.tagListJson.concat(model.addedTagListJson), null, 2)], {
-        type: "text/plain"
+      type: "text/plain"
     })))
 
   }
