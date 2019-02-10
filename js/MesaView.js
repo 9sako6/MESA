@@ -3,8 +3,8 @@ class MesaView {
 
   }
 
-  writeTextArea(text) {
-    document.getElementById("user-text").value = text;
+  writeTextArea(text, model) {
+    model.editor.session.setValue(text);
   }
 
   // 読み込んだjsonを元にタグボタンを作る

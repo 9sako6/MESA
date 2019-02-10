@@ -14,8 +14,7 @@ class MesaController {
     this.downloadJson(this.model, this.view);
   }
 
-  loadTextFile(model, view, evt) {
-    // テキストファイル読み込み
+  loadTextFile(model, view) {
     $('#upload-button').on('change', function(evt) {
       var file = evt.target.files;
       // FileReaderの作成
@@ -24,10 +23,7 @@ class MesaController {
       reader.readAsText(file[0]);
       // 読込終了後の処理
       reader.onload = function() {
-        // modelにテキスト保持
-        model.text = reader.result;
-        // テキストエリアに表示する
-        view.writeTextArea(model.text);
+        view.writeTextArea(reader.result, model);
       }
     });
   }
@@ -47,7 +43,6 @@ class MesaController {
         if (json) {
           model.tagListJson = json;
         }
-        // model.tagListJson = JSON.parse(reader.result);
         // tagボタンを作る
         view.makeTagButton(model.tagListJson);
       }
@@ -55,45 +50,30 @@ class MesaController {
   }
 
   insertTag(model, view) {
-    // タグの挿入
     // 親要素である#tagsに対してイベントを設定しないとjson読み込んで追加したボタンが動かない
     $('#tags').on('click', '.tag-btn', function() {
-      var textarea = document.getElementById('user-text');
-
-      var text = textarea.value;
-      var textLen = text.length;
-      var cursorPos = textarea.selectionStart;
-
-      var former = text.substr(0, cursorPos);
       var insertString = $(this).attr("val");
-      var latter = text.substr(cursorPos, textLen);
-      model.textHistory = text; // 変更前のテキストを保持
-      text = former + insertString + latter;
-      textarea.value = text;
+      var selections = model.editor.getSelection().getAllRanges();
+      // insert all positions
+      for (let selection of selections) {
+        model.editor.session.insert(selection.cursor, insertString);
+      }
     });
   }
 
   insertXMLTag(model, view) {
-    // XMLタグの挿入
     // 親要素である#tagsに対してイベントを設定しないとjson読み込んで追加したボタンが動かない
     $('#tags').on('click', '.xml-tag-btn', function() {
-      var textarea = document.getElementById('user-text');
-
-      var text = textarea.value;
-      var textLen = text.length;
-      // カーソル位置の取得
-      var cursorPosStart = textarea.selectionStart;
-      var cursorPosEnd = textarea.selectionEnd;
-      var selectedRange = cursorPosEnd - cursorPosStart;
-
-      var former = text.substr(0, cursorPosStart);
-      var middle = text.substr(cursorPosStart, selectedRange);
+      var selections = model.editor.getSelection().getAllRanges();
       var beginTag = "<" + $(this).attr("val") + ">";
       var endTag = "</" + $(this).attr("val") + ">";
-      var latter = text.substr(cursorPosEnd, textLen - cursorPosEnd);
-      model.textHistory = text; // 変更前のテキストを保持
-      text = former + beginTag + middle + endTag + latter;
-      textarea.value = text;
+      // insert all positions
+      for (let selection of selections) {
+        // the order (endTag -> beginTag) is important
+        // in the case: position.start = position.end
+        model.editor.session.insert(selection.end, endTag);
+        model.editor.session.insert(selection.start, beginTag);
+      }
     });
   }
 
@@ -112,14 +92,14 @@ class MesaController {
   undo(model, view) {
     // undo(1回前の内容を保存しておいて戻す)
     $('#undo-btn').on('click', function() {
-      var textarea = document.getElementById('user-text');
+      var textarea = document.getElementById('text-editor');
       textarea.value = model.textHistory;
     });
   }
 
   downloadText(model, view) {
     //download text file
-    document.querySelector('#text-donwload').addEventListener('click', (e) => e.target.href = URL.createObjectURL(new Blob([document.getElementById('user-text').value], {
+    document.querySelector('#text-donwload').addEventListener('click', (e) => e.target.href = URL.createObjectURL(new Blob([document.getElementById('text-editor').value], {
         type: "text/plain"
     })))
   }

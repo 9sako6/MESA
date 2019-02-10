@@ -1,4 +1,4 @@
-$base-color: #282C35;
+$base-color: rgb(44, 49, 52);
 
 html, body {
     margin: 0;
@@ -13,7 +13,7 @@ article, nav, section, main {
   display: flex;
   margin-top: 50px;
   height: 100%;
-  flex-wrap: wrap
+  flex-wrap: wrap;
 }
 .text-container {
   margin-left: 50px;
@@ -73,29 +73,15 @@ $undo-btn-color: rgb(230, 160, 230);
   background: $xml-tag-btn-color;
   color: $base-color;
 }
-#undo-btn {
-  float: right;
-  width: 20px;
-  height: 20px;
-  vertical-align: middle;
-}
+
 
 $text-area-color: rgb(52, 54, 65);
 
-#user-text {
-  min-width: 50%;
-  max-width: 100%;
-  min-height: 50%;
-  max-height: 70%;
-  font-size: 16px;
-  background-color: $text-area-color;
-  color: #eee;
+#text-editor {
+  width: 950px;
+  height: 500px;
 }
 
-#user-text:focus {
-    box-shadow: 1px 1px 3px 1px rgb(130, 130, 130);
-    outline: none;           // ブラウザが標準で付加する線を消したいとき
-}
 
 
 .file-info {
@@ -148,7 +134,7 @@ input[type=checkbox]:checked + label:before {
   content: "\f046";
   color: $xml-tag-btn-color;
 } /* allow space for check mark */
-// check box ここまで
+// check box
 
 .func-btn a {
   color: $func-btn-color;
@@ -161,7 +147,6 @@ input[type=checkbox]:checked + label:before {
 #added-message {
   padding: 1em;
   color: rgb(92, 104, 105);
-;
 }
 
 footer {

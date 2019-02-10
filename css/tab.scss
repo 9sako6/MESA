@@ -1,5 +1,5 @@
-
-/*タブ切り替え全体のスタイル*/
+// (source: https://bagelee.com/design/css/create_tabs_using_only_css/)
+// タブ切り替え全体のスタイル
 .tabs {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   position: absolute;
@@ -9,7 +9,7 @@
   left: 75%;
 }
 
-/*タブのスタイル*/
+// タブのスタイル
 .tab_item {
   width: calc(100%/2);
   height: 50px;
@@ -29,12 +29,12 @@
   opacity: 0.75;
 }
 
-/*ラジオボタンを全て消す*/
+// ラジオボタンを全て消す
 input[name="tab_item"] {
   display: none;
 }
 
-/*タブ切り替えの中身のスタイル*/
+// タブ切り替えの中身のスタイル
 .tab_content {
   width: 100%;
   display: none;
@@ -42,14 +42,13 @@ input[name="tab_item"] {
   overflow: hidden;
 }
 
-
-/*選択されているタブのコンテンツのみを表示*/
+// 選択されているタブのコンテンツのみを表示
 #tagslist:checked ~ #tagslist_content,
 #settings:checked ~ #settings_content {
   display: inline-block;
 }
 
-/*選択されているタブのスタイルを変える*/
+// 選択されているタブのスタイルを変える
 .tabs input:checked + .tab_item {
   background-color: $func-btn-color;
   color: $base-color;
