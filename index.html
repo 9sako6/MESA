@@ -2,6 +2,18 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <script>
+  // (source: https://github.com/nwtgck/nipp/blob/develop/index.html)
+  // Register server-worker.js when service worker is available
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').then(function(){
+      console.log('Service Worker Registered');
+    }).catch(function (m) {
+      // (source: https://ja.stackoverflow.com/questions/19104/promise%E3%81%AEthen%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%AF%E7%AC%AC2%E5%BC%95%E6%95%B0%E3%82%92%E6%8C%87%E5%AE%9A%E3%81%97%E3%81%AA%E3%81%8F%E3%81%A6%E3%82%82-promise%E3%81%8C%E6%A3%84%E5%8D%B4%E6%B8%88%E3%81%A8%E3%81%AA%E3%81%A3%E3%81%9F%E5%A0%B4%E5%90%88%E3%81%AB%E3%81%AF%E5%BF%85%E3%81%9A%E5%91%BC%E3%81%B0%E3%82%8C%E3%82%8B%E3%81%AE%E3%81%A7%E3%81%97%E3%82%87%E3%81%86%E3%81%8B)
+      console.log('error');
+    });
+  }
+  </script>
   <title>Annotation -MESA-</title>
   <link rel="stylesheet" href="./css/style.css">
   <!-- fontawesome -->
@@ -21,13 +33,6 @@
 
 </head>
 <body>
-  <script>
-if('serviceWorker' in navigator) {
-  navigator.serviceWorker
-           .register('/sw.js')
-           .then(function() { console.log("Service Worker Registered"); });
-}
-</script>
   <main id="root">
     <div class="all-page">
       <article class="page">
