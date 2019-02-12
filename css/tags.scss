@@ -1,12 +1,16 @@
 .tags {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: rgb(52, 52, 50);
   cursor: move;
   position: absolute;
   z-index: 1000;
+  max-width: 350px;
+  border-radius: 10px;
+  transition: background-color .3s ease;
 }
 
 .tags:hover {
-  background-color: rgb(64, 69, 62);;
+  background-color: rgb(64, 64, 62);
   box-shadow: 0 0 10px rgba(100, 100, 100, 0.2);
 
 }
