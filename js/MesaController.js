@@ -13,6 +13,7 @@ class MesaController {
     this.downloadJson(this.model, this.view);
     //
     this.alertWhenReload();
+    this.dragController();
   }
 
   loadTextFile(model, view) {
@@ -48,7 +49,6 @@ class MesaController {
   }
 
   insertTag(model, view) {
-    // 親要素である#tagsに対してイベントを設定しないとjson読み込んで追加したボタンが動かない
     $('#tags').on('click', '.tag-btn', function() {
       var insertString = $(this).attr("val");
       var selections = model.editor.getSelection().getAllRanges();
@@ -64,7 +64,6 @@ class MesaController {
   }
 
   insertXMLTag(model, view) {
-    // 親要素である#tagsに対してイベントを設定しないとjson読み込んで追加したボタンが動かない
     $('#tags').on('click', '.xml-tag-btn', function() {
       var selections = model.editor.getSelection().getAllRanges();
       var beginTag = "<" + $(this).attr("val") + ">";
@@ -99,30 +98,31 @@ class MesaController {
   downloadText(model, view) {
     // download text file
     document.querySelector('#text-donwload')
-    .addEventListener('click', (e) => {
-      // url
-      e.target.href = URL.createObjectURL(
-        new Blob([model.editor.session.getValue()],
-        { type: "text/plain" })
-      )
-      // filename
-      var filename = $('#download-filename').val() || "mesa_file.txt";
-      e.target.download = filename;
-    })
+      .addEventListener('click', (e) => {
+        // url
+        e.target.href = URL.createObjectURL(
+          new Blob([model.editor.session.getValue()], {
+            type: "text/plain"
+          })
+        )
+        // filename
+        var filename = $('#download-filename').val() || "mesa_file.txt";
+        e.target.download = filename;
+      })
   }
 
   downloadJson(model, view) {
     //download json file
     document.querySelector('#json-donwload')
-    .addEventListener('click', (e) => {
-      // url
-      e.target.href = URL.createObjectURL(new Blob([JSON.stringify(model.tagListJson.concat(model.addedTagListJson), null, 2)],
-      { type: "text/plain" })
-      )
-      // filename
-      var filename = $('#download-jsonname').val() || "mesa_tags";
-      e.target.download = filename + ".json";
-    })
+      .addEventListener('click', (e) => {
+        // url
+        e.target.href = URL.createObjectURL(new Blob([JSON.stringify(model.tagListJson.concat(model.addedTagListJson), null, 2)], {
+          type: "text/plain"
+        }))
+        // filename
+        var filename = $('#download-jsonname').val() || "mesa_tags";
+        e.target.download = filename + ".json";
+      })
   }
 
   alertWhenReload() {
@@ -130,5 +130,54 @@ class MesaController {
       var msg = "Data will be lost if you leave the page, are you sure?";
       return msg;
     });
+  }
+
+  dragController() {
+    // (source: https://q-az.net/elements-drag-and-drop/)
+
+    var x;
+    var y;
+    var element = $("#tags")[0];
+
+    element.addEventListener("dragstart", mdown);
+
+    // when mouce click
+    function mdown(e) {
+      // add .drag to the class
+      this.classList.add("drag");
+      // get the position of the element
+      x = event.pageX - this.offsetLeft;
+      y = event.pageY - this.offsetTop;
+      // callback move events
+      document.body.addEventListener("mousemove", mmove, false);
+      // document.body.addEventListener("touchmove", mmove, false);
+    }
+
+    // when mouse move
+    function mmove(e) {
+      var drag = document.getElementsByClassName("drag")[0];
+      // move the element
+      drag.style.top = event.pageY - y + "px";
+      drag.style.left = event.pageX - x + "px";
+      // when mouse or cursor over
+      drag.addEventListener("mouseup", mup, false);
+      document.body.addEventListener("mouseleave", mup, false);
+      // drag.addEventListener("touchend", mup, false);
+      // document.body.addEventListener("touchleave", mup, false);
+    }
+
+    // when mouse up
+    function mup(e) {
+      var drag = document.getElementsByClassName("drag")[0];
+      // remove move event handlers
+      document.body.removeEventListener("mousemove", mmove, false);
+      // document.body.removeEventListener("touchmove", mmove, false);
+      if (drag != null) {
+        drag.removeEventListener("mouseup", mup, false);
+        // drag.removeEventListener("touchend", mup, false);
+        // remove class .drag
+        drag.classList.remove("drag");
+      }
+    }
   }
 }

@@ -181,4 +181,20 @@ input[name="tab_item"] {
 #tag-sep-form {
   width: auto; }
 
+.tags {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  cursor: move;
+  position: absolute;
+  z-index: 1000; }
+
+.tags:hover {
+  background-color: #40453e;
+  box-shadow: 0 0 10px rgba(100, 100, 100, 0.2); }
+
+.drag {
+  z-index: 1001; }
+
+.tag-btn, .xml-tag-btn {
+  margin: 10px 10px 10px 10px; }
+
 /*# sourceMappingURL=style.css.map */
