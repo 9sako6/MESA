@@ -4,18 +4,17 @@
   <meta charset="utf-8">
   <!-- service worker -->
   <script>
-  // (source: https://github.com/nwtgck/nipp/blob/develop/index.html)
-  // Register server-worker.js when service worker is available
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').then(function(){
-      console.log('Service Worker Registered');
-    }).catch(function (m) {
-      // (source: https://ja.stackoverflow.com/questions/19104/promise%E3%81%AEthen%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%AF%E7%AC%AC2%E5%BC%95%E6%95%B0%E3%82%92%E6%8C%87%E5%AE%9A%E3%81%97%E3%81%AA%E3%81%8F%E3%81%A6%E3%82%82-promise%E3%81%8C%E6%A3%84%E5%8D%B4%E6%B8%88%E3%81%A8%E3%81%AA%E3%81%A3%E3%81%9F%E5%A0%B4%E5%90%88%E3%81%AB%E3%81%AF%E5%BF%85%E3%81%9A%E5%91%BC%E3%81%B0%E3%82%8C%E3%82%8B%E3%81%AE%E3%81%A7%E3%81%97%E3%82%87%E3%81%86%E3%81%8B)
-      console.log('error');
-    });
-  }
+    // (source: https://github.com/nwtgck/nipp/blob/develop/index.html)
+    // Register server-worker.js when service worker is available
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').then(function() {
+        console.log('Service Worker Registered');
+      }).catch(function(m) {
+        // (source: https://ja.stackoverflow.com/questions/19104/promise%E3%81%AEthen%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%AF%E7%AC%AC2%E5%BC%95%E6%95%B0%E3%82%92%E6%8C%87%E5%AE%9A%E3%81%97%E3%81%AA%E3%81%8F%E3%81%A6%E3%82%82-promise%E3%81%8C%E6%A3%84%E5%8D%B4%E6%B8%88%E3%81%A8%E3%81%AA%E3%81%A3%E3%81%9F%E5%A0%B4%E5%90%88%E3%81%AB%E3%81%AF%E5%BF%85%E3%81%9A%E5%91%BC%E3%81%B0%E3%82%8C%E3%82%8B%E3%81%AE%E3%81%A7%E3%81%97%E3%82%87%E3%81%86%E3%81%8B)
+        console.log('error');
+      });
+    }
   </script>
-
   <title>Annotation -MESA-</title>
   <link rel="icon" href="./favicon.ico">
   <link rel="stylesheet" href="./css/style.css">
@@ -23,7 +22,6 @@
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   <!-- jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
   <script type="text/javascript" src="./js/MesaModel.js"></script>
   <script type="text/javascript" src="./js/MesaView.js"></script>
   <script type="text/javascript" src="./js/MesaController.js"></script>
@@ -32,8 +30,6 @@
       new MesaController();
     });
   </script>
-
-
 </head>
 <body>
   <main id="root">
@@ -42,9 +38,9 @@
         <div class="text-container">
           <form>
             <label class="func-btn" for="upload-button">
-            +Open
-            <input type="file" id="upload-button" style="display:none;" onchange="$('#file-name').text($(this).val().split('\\').pop())">
-          </label>
+              +Open
+              <input type="file" id="upload-button" style="display:none;" onchange="$('#file-name').text($(this).val().split('\\').pop())">
+            </label>
             <span class="file-info" id="file-name"></span>
           </form>
           <!-- ace editor -->
@@ -64,6 +60,7 @@
           </table>
         </div>
         <div class="tags-container">
+
           <!-- load tags -->
           <div class="tabs">
             <input id="tagslist" type="radio" name="tab_item" checked>
@@ -75,71 +72,83 @@
               <div class="tab_content_description">
                 <div class="c-txtsp">
                   <table>
-                  <tr>
-                  <td>
-                  <div class="load-tags">
-                    <label class="func-btn" id="load-json" for="load-tags-button">
-                    +Load Tags (JSON)
-                    <input type="file" id="load-tags-button" style="display:none;" onchange="$('#tag-file-name').text($(this).val().split('\\').pop())">
-                  </label>
-                  </td>
-                  <tr><td><span class="file-info" id="tag-file-name"></span></td></tr>
-                  </div>
-                  </tr>
-                  </table>
-                  <table>
                     <tr>
                       <td>
-                        <div class="func-btn"><a id="json-donwload" download="mesa_tags.json" href="#">↓Save Tags (JSON)</a></div>
+                        <div class="load-tags">
+                          <label class="func-btn" id="load-json" for="load-tags-button">
+                            +Load Tags (JSON)
+                            <input type="file" id="load-tags-button" style="display:none;" onchange="$('#tag-file-name').text($(this).val().split('\\').pop())">
+                          </label>
                       </td>
-                      <td>
-                        <textarea id="download-jsonname" rows="1" cols="16" placeholder="Enter a file name"></textarea>
-                        <span class="file-info">.json</span>
-                      </td>
+                    <tr>
+                      <td><span class="file-info" id="tag-file-name"></span></td>
                     </tr>
-                  </table>
-                  <!-- tags -->
-                  <div class="tags" id="tags" draggable="true">
-                  </div>
+                </div>
+                </tr>
+                </table>
+                <table>
+                  <tr>
+                    <td>
+                      <div class="func-btn"><a id="json-donwload" download="mesa_tags.json" href="#">↓Save Tags (JSON)</a></div>
+                    </td>
+                    <td>
+                      <textarea id="download-jsonname" rows="1" cols="16" placeholder="Enter a file name"></textarea>
+                      <span class="file-info">.json</span>
+                    </td>
+                  </tr>
+                </table>
+                <!-- tags -->
+                <div class="tags" id="tags" draggable="true">
                 </div>
               </div>
             </div>
-            <!-- settings -->
-            <div class="tab_content" id="settings_content">
-              <div class="tab_content_description">
-                <div class="c-txtsp">
-                  <!-- add tags -->
-                  <div class="add-tags">
-                    <table>
-                      <tr>
-                        <td class="table-header">Name</td>
-                        <td><textarea id="tag-name-form" rows="1""></textarea></td>
+          </div>
+          <!-- settings -->
+          <div class="tab_content" id="settings_content">
+            <div class="tab_content_description">
+              <div class="c-txtsp">
+                <!-- add tags -->
+                <div class="add-tags">
+                  <table>
+                    <tr>
+                      <td class="table-header">Name</td>
+                      <td><textarea id="tag-name-form" rows="1""></textarea></td>
                       </tr>
                       <tr>
-                        <td class="table-header">Separator</td>
+                        <td class=" table-header">Separator</td>
                         <td><textarea id="tag-sep-form" rows="1"" placeholder="If you need ..."></textarea></td>
-                      </tr>
-                      <tr>
-                        <td class="table-header">XML Tag</td>
-                        <td>
-                          <input id="xml-flag" type="checkbox">
-                          <label for="xml-flag"></label>
-                        </td>
-                      </tr>
-                    </table>
-                    <div class="func-btn" id="add-tag-btn">+Add Tag</div>
-                    <div id="added-message"></div>
-                  </div>
+                    </tr>
+                    <tr>
+                      <td class="table-header">XML Tag</td>
+                      <td>
+                        <input id="xml-flag" type="checkbox">
+                        <label for="xml-flag"></label>
+                      </td>
+                    </tr>
+                  </table>
+                  <div class="func-btn" id="add-tag-btn">+Add Tag</div>
+                  <div id="added-message"></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
     </div>
+    </div>
     </article>
     </div>
   </main>
-  <footer>Copyright 2019 - 9sako6</footer>
+  <footer>
+    <span class="footer-content">
+       Copyright 2019 - <a href="https://github.com/9sako6/" target="_blank">9sako6</a>
+    </span>
+    <div class="sns-buttons">
+      <a href="https://twitter.com/9sako6?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @9sako6</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="horizontal" data-text="A simple XML annotation tool: https://github.com/9sako6/MESA/">Tweet</a>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <iframe src="http://ghbtns.com/github-btn.html?user=9sako6&repo=MESA&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+    </div>
+  </footer>
 </body>
 
 </html>
