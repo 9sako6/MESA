@@ -1,0 +1,91 @@
+$base-color: rgb(44, 49, 52);
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background-color: $base-color;
+}
+
+article,
+main,
+nav,
+section {
+  display: block;
+}
+
+.page {
+  display: flex;
+  margin-top: 50px;
+  height: 100%;
+  flex-wrap: wrap;
+}
+
+.text-container {
+  margin-left: 50px;
+  max-width: 70%;
+}
+
+.tags-container {
+  margin-left: 50px;
+  display: block;
+  max-width: 30%;
+}
+
+.file-info {
+  color: #eee;
+  word-wrap: break-word;
+}
+
+.table-header {
+  padding-right: 10px;
+  color: rgb(230, 160, 70);
+}
+
+#added-message {
+  padding: 1em;
+  color: rgb(92, 104, 105);
+}
+
+footer {
+  padding: 5px;
+  top: 95%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  color: rgba(77, 77, 77, .7);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+  padding-top: 0.7em;
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  bottom: 0;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  // background-color: rgb(54, 57, 62);
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.footer-content {
+  padding-left: 1em;
+  text-shadow: 1px 1px 1px 1px 1px #999999;
+  color: #818182;
+  font-family: "Georgia";
+}
+
+.footer-content a {
+  text-decoration:none;
+  color: #00aaee;
+}
+
+.sns-buttons {
+  text-align: right;
+  float: right;
+}
+@import "buttons";
+@import "tabs";
+@import "forms";
+@import "tags";

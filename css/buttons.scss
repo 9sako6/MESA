@@ -1,0 +1,82 @@
+$func-btn-color: rgb(230, 160, 70);
+$tag-btn-color: rgb(70, 160, 230);
+$xml-tag-btn-color: rgb(230, 70,160);
+$undo-btn-color: rgb(230, 160, 230);
+
+.func-btn {
+  margin: 5px;
+  height: 20px;
+  padding: 0.2em;
+  font-size: 14px;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+  background-color: $base-color;
+  color: $func-btn-color;
+  border: solid 2px $func-btn-color;
+  border-radius: 3px;
+  transition: .3s;
+}
+
+.func-btn:hover {
+  background: $func-btn-color;
+  color: $base-color;
+}
+
+.tag-btn {
+  background-color: $base-color;
+  color: $tag-btn-color;
+  border-color: $tag-btn-color;
+}
+
+.tag-btn:hover {
+  background: $tag-btn-color;
+  color: $base-color;
+}
+
+.xml-tag-btn {
+  background-color: $base-color;
+  color: $xml-tag-btn-color;
+  border-color: $xml-tag-btn-color;
+}
+
+.xml-tag-btn:hover {
+  background: $xml-tag-btn-color;
+  color: $base-color;
+}
+
+// check box
+// (source: https://kodocode.net/design-css-checkbox/)
+@import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+input[type=checkbox] {
+  display:none;/* to hide the checkbox itself */
+  color: #eee;
+}
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  color: #eee;
+  content: "\f096";
+}
+input[type=checkbox]:checked + label:before {
+  content: "\f046";
+  color: $xml-tag-btn-color;
+} /* allow space for check mark */
+// check box
+
+.func-btn a {
+  color: $func-btn-color;
+  text-decoration: none;
+}
+.func-btn a:hover {
+  color: $base-color;
+}
+
+.add-tags {
+  padding: 10px;
+  display: block;
+  // margin-top: 50px;
+  // border: solid 2px $func-btn-color;
+  border-radius: 3px;
+}

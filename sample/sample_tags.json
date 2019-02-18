@@ -1,0 +1,17 @@
+[
+  {
+    "name": "body",
+    "sepChar": "\t",
+    "xmlFlag": true
+  },
+  {
+    "name": "title",
+    "sepChar": "\t",
+    "xmlFlag": true
+  },
+  {
+    "name": "person",
+    "sepChar": "\t",
+    "xmlFlag": true
+  }
+]
