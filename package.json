@@ -1,0 +1,25 @@
+{
+  "name": "MESA",
+  "version": "0.2.0",
+  "description": "A simple XML annotation tool.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -m '[AUTO] Upload pages' -d . -a"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/9sako6/MESA.git"
+  },
+  "author": "9sako6",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/9sako6/MESA/issues"
+  },
+  "homepage": "https://github.com/9sako6/MESA#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
+  }
+}
