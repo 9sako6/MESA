@@ -7,8 +7,6 @@ const CACHE_FILE = [
   './',
   './index.html',
   './favicon.ico',
-  // AMP
-  "https://cdn.ampproject.org/v0.js",
   // ace editor
   "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.0/ace.js",
   // jquery

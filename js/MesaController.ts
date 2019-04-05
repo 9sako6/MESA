@@ -1,4 +1,6 @@
 class MesaController {
+  model: MesaModel;
+  view: MesaView;
   constructor() {
     // init
     this.model = new MesaModel();
@@ -16,11 +18,11 @@ class MesaController {
     this.dragController();
   }
 
-  loadTextFile(model, view) {
+  loadTextFile(model: MesaModel, view: MesaView) {
     $('#upload-button').on('change', function(evt) {
-      var file = evt.target.files;
+      let file = evt.target.files;
       // make FileReader
-      var reader = new FileReader();
+      let reader = new FileReader();
       reader.readAsText(file[0]);
       // process after loading
       reader.onload = function() {
@@ -29,16 +31,16 @@ class MesaController {
     });
   }
 
-  loadJsonFile(model, view) {
+  loadJsonFile(model: MesaModel, view: MesaView) {
     $('#load-tags-button').on('change', function(evt) {
-      var file = evt.target.files;
+      let file = evt.target.files;
       // make FileReader
-      var reader = new FileReader();
+      let reader = new FileReader();
       reader.readAsText(file[0]);
       // process after loading
       reader.onload = function() {
         // save json in model
-        var json = JSON.parse(reader.result)
+        let json = JSON.parse(reader.result)
         if (json) {
           model.tagListJson = json;
         }
@@ -48,10 +50,10 @@ class MesaController {
     });
   }
 
-  insertTag(model, view) {
+  insertTag(model: MesaModel, view: MesaView) {
     $('#tags').on('click', '.tag-btn', function() {
-      var insertString = $(this).attr("val");
-      var selections = model.editor.getSelection().getAllRanges();
+      let insertString = $(this).attr("val");
+      let selections = model.editor.getSelection().getAllRanges();
       // insert all positions
       for (let selection of selections) {
         if (selection.cursor) {
@@ -63,11 +65,11 @@ class MesaController {
     });
   }
 
-  insertXMLTag(model, view) {
+  insertXMLTag(model: MesaModel, view: MesaView) {
     $('#tags').on('click', '.xml-tag-btn', function() {
-      var selections = model.editor.getSelection().getAllRanges();
-      var beginTag = "<" + $(this).attr("val") + ">";
-      var endTag = "</" + $(this).attr("val") + ">";
+      let selections = model.editor.getSelection().getAllRanges();
+      let beginTag = "<" + $(this).attr("val") + ">";
+      let endTag = "</" + $(this).attr("val") + ">";
       // insert all positions
       for (let selection of selections) {
         // the order (endTag -> beginTag) is important
@@ -78,12 +80,12 @@ class MesaController {
     });
   }
 
-  addTag(model, view) {
+  addTag(model: MesaModel, view: MesaView) {
     $('#add-tag-btn').on('click', function() {
-      var name = document.getElementById('tag-name-form').value || "name";
-      var sepChar = document.getElementById('tag-sep-form').value || "\t";
-      var xmlFlag = document.getElementById('xml-flag').checked;
-      var newTag = {
+      let name = document.getElementById('tag-name-form').value || "name";
+      let sepChar = document.getElementById('tag-sep-form').value || "\t";
+      let xmlFlag = document.getElementById('xml-flag').checked!;
+      let newTag = {
         "name": name,
         "sepChar": sepChar,
         "xmlFlag": xmlFlag
@@ -95,7 +97,7 @@ class MesaController {
     });
   }
 
-  downloadText(model, view) {
+  downloadText(model: MesaModel, view: MesaView) {
     // download text file
     document.querySelector('#text-donwload')
       .addEventListener('click', (e) => {
@@ -106,7 +108,7 @@ class MesaController {
           })
         )
         // filename
-        var filename = $('#download-filename').val() || "mesa_file.txt";
+        let filename = $('#download-filename').val() || "mesa_file.txt";
         e.target.download = filename;
       })
   }
@@ -120,14 +122,14 @@ class MesaController {
           type: "text/plain"
         }))
         // filename
-        var filename = $('#download-jsonname').val() || "mesa_tags";
+        let filename = $('#download-jsonname').val() || "mesa_tags";
         e.target.download = filename + ".json";
       })
   }
 
   alertWhenReload() {
     $(window).on('beforeunload', function(e) {
-      var msg = "Data will be lost if you leave the page, are you sure?";
+      let msg = "Data will be lost if you leave the page, are you sure?";
       return msg;
     });
   }
@@ -135,14 +137,14 @@ class MesaController {
   dragController() {
     // (source: https://q-az.net/elements-drag-and-drop/)
 
-    var x;
-    var y;
-    var element = $("#tags")[0];
+    let x;
+    let y;
+    let element = $("#tags")[0];
 
     element.addEventListener("dragstart", mdown);
 
     // when mouce click
-    function mdown(e) {
+    function mdown() {
       // add .drag to the class
       this.classList.add("drag");
       // get the position of the element
@@ -154,8 +156,8 @@ class MesaController {
     }
 
     // when mouse move
-    function mmove(e) {
-      var drag = document.getElementsByClassName("drag")[0];
+    function mmove() {
+      let drag = document.getElementsByClassName("drag")[0];
       // move the element
       drag.style.top = event.pageY - y + "px";
       drag.style.left = event.pageX - x + "px";
@@ -167,8 +169,8 @@ class MesaController {
     }
 
     // when mouse up
-    function mup(e) {
-      var drag = document.getElementsByClassName("drag")[0];
+    function mup() {
+      let drag = document.getElementsByClassName("drag")[0];
       // remove move event handlers
       document.body.removeEventListener("mousemove", mmove, false);
       // document.body.removeEventListener("touchmove", mmove, false);
