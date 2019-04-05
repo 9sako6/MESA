@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "gh-pages -m '[AUTO] Upload pages' -d . -a",
-    "compile": "tsc js/MesaModel.ts js/MesaView.ts js/MesaController.ts js/aceEditor.ts js/mesa.ts --out js/mesa.js",
+    "compile": "tsc src/MesaModel.ts src/MesaView.ts src/MesaController.ts src/aceEditor.ts src/mesa.ts --out src/mesa.js",
     "sass": "sass css/style.scss:css/style.css"
   },
   "repository": {
@@ -14,7 +14,7 @@
     "url": "https://github.com/9sako6/MESA.git"
   },
   "author": "9sako6",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/9sako6/MESA/issues"
   },
