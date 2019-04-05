@@ -13,6 +13,29 @@ var MesaView = /** @class */ (function () {
     MesaView.prototype.writeTextArea = function (text, model) {
         model.editor.session.setValue(text);
     };
+    MesaView.prototype.initUploadButton = function () {
+        var button = "\n    <form>\n    <label class=\"func-btn\" for=\"upload-button\" style=\"cursor: pointer\">\n      Open\n      <input type=\"file\" id=\"upload-button\" style=\"display:none;\">\n    </label>\n    <span class=\"file-info\" id=\"file-name\"></span>\n    </form>";
+        $('#upload-button').replaceWith(button);
+    };
+    MesaView.prototype.initSaveButton = function () {
+        var button = "\n    <table>\n    <tr>\n      <td>\n        <div class=\"func-btn\" style=\"cursor: pointer\"><a id=\"text-donwload\" download=\"mesa_file.txt\" href=\"#\">Save</a></div>\n      </td>\n      <td>\n        <input type='text' id=\"download-filename\" placeholder=\"Enter a file name\">\n      </td>\n    </tr>\n    </table>";
+        $('#save-button').replaceWith(button);
+    };
+    MesaView.prototype.initTagUploadButton = function () {
+        var button = "\n    <form>\n      <label class=\"func-btn\" id=\"load-json\" for=\"load-tags-button\" style=\"cursor: pointer\">\n        Load Tags\n        <input type=\"file\" id=\"load-tags-button\" style=\"display:none;\">\n      </label>\n      <span class=\"file-info\" id=\"tag-file-name\"></span>\n    </form>";
+        $('#tag-upload-button').replaceWith(button);
+    };
+    MesaView.prototype.initTagSaveButton = function () {
+        var button = "\n    <div class=\"func-btn\" style=\"cursor: pointer\"><a id=\"json-donwload\" download=\"mesa_tags.json\" href=\"#\">Save Tags</a></div>\n    <input type='text' id=\"download-jsonname\" placeholder=\"Enter a file name\">\n    <span class=\"file-info\">.json</span>";
+        $('#tag-save-button').replaceWith(button);
+    };
+    MesaView.prototype.initTagSettingArea = function () {
+        var nameRow = "\n    <td class=\"table-header\">Name</td>\n    <td><input type='text' id=\"tag-name-form\" placeholder=\"Enter a tag name\"></td>";
+        var sepRow = "\n    <td class=\" table-header\">Separator</td>\n    <td><input type='text' id=\"tag-sep-form\" placeholder=\"If you need ...\"></td>";
+        var isXmlRow = "\n    <td class=\"table-header\">XML Tag</td>\n    <td>\n      <input id=\"xml-flag\" type=\"checkbox\">\n      <label for=\"xml-flag\"></label>\n    </td>";
+        var table = "\n    <table id=\"tag-setting-table\">\n    <tr>\n      " + nameRow + "\n    </tr>\n    <tr>\n      " + sepRow + "\n    </tr>\n    <tr>\n      " + isXmlRow + "\n    </tr>\n    </table>";
+        $('#tag-setting-area').replaceWith(table);
+    };
     MesaView.prototype.makeTagButton = function (json) {
         var addElem = "";
         for (var _i = 0, json_1 = json; _i < json_1.length; _i++) {
@@ -43,6 +66,11 @@ var MesaController = /** @class */ (function () {
         // init
         this.model = new MesaModel();
         this.view = new MesaView();
+        this.view.initUploadButton();
+        this.view.initSaveButton();
+        this.view.initTagUploadButton();
+        this.view.initTagSaveButton();
+        this.view.initTagSettingArea();
         // events
         this.loadTextFile(this.model, this.view);
         this.loadJsonFile(this.model, this.view);
@@ -65,6 +93,7 @@ var MesaController = /** @class */ (function () {
             reader.onload = function () {
                 view.writeTextArea(reader.result, model);
             };
+            $('#file-name').text(file[0].name);
         });
     };
     MesaController.prototype.loadJsonFile = function (model, view) {
@@ -83,6 +112,7 @@ var MesaController = /** @class */ (function () {
                 //
                 view.makeTagButton(model.tagListJson);
             };
+            $('#tag-file-name').text(file[0].name);
         });
     };
     MesaController.prototype.insertTag = function (model, view) {
@@ -179,7 +209,6 @@ var MesaController = /** @class */ (function () {
             y = event.pageY - this.offsetTop;
             // callback move events
             document.body.addEventListener("mousemove", mmove, false);
-            // document.body.addEventListener("touchmove", mmove, false);
         }
         // when mouse move
         function mmove() {
@@ -190,19 +219,14 @@ var MesaController = /** @class */ (function () {
             // when mouse or cursor over
             drag.addEventListener("mouseup", mup, false);
             document.body.addEventListener("mouseleave", mup, false);
-            // drag.addEventListener("touchend", mup, false);
-            // document.body.addEventListener("touchleave", mup, false);
         }
         // when mouse up
         function mup() {
             var drag = document.getElementsByClassName("drag")[0];
             // remove move event handlers
             document.body.removeEventListener("mousemove", mmove, false);
-            // document.body.removeEventListener("touchmove", mmove, false);
             if (drag != null) {
                 drag.removeEventListener("mouseup", mup, false);
-                // drag.removeEventListener("touchend", mup, false);
-                // remove class .drag
                 drag.classList.remove("drag");
             }
         }
