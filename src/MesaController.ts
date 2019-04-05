@@ -1,3 +1,6 @@
+/// <reference path="./MesaModel.ts" />
+/// <reference path="./MesaView.ts" />
+
 class MesaController {
   model: MesaModel;
   view: MesaView;
@@ -24,56 +27,54 @@ class MesaController {
   }
 
   loadTextFile(model: MesaModel, view: MesaView) {
-    $('#upload-button').on('change', function(evt) {
-      let file: File = evt.target.files;
+    $('#upload-button').on('change', function (evt) {
+      const elem: HTMLInputElement = <HTMLInputElement>evt.target;
+      const fileList: FileList = elem.files;
       // make FileReader
-      let reader = new FileReader();
-      reader.readAsText(file[0]);
+      const reader = new FileReader();
+      reader.readAsText(fileList[0]);
       // process after loading
-      reader.onload = function() {
-        view.writeTextArea(reader.result, model);
+      reader.onload = function () {
+        view.writeTextArea(String(reader.result), model);
       }
-      $('#file-name').text(file[0].name);
+      $('#file-name').text(fileList[0].name);
     });
   }
 
   loadJsonFile(model: MesaModel, view: MesaView) {
-    $('#load-tags-button').on('change', function(evt) {
-      let file = evt.target.files;
+    $('#load-tags-button').on('change', function (evt) {
+      const elem: HTMLInputElement = <HTMLInputElement>evt.target;
+      const fileList: FileList = elem.files;
       // make FileReader
-      let reader = new FileReader();
-      reader.readAsText(file[0]);
+      const reader = new FileReader();
+      reader.readAsText(fileList[0]);
       // process after loading
-      reader.onload = function() {
+      reader.onload = function () {
         // save json in model
-        let json = JSON.parse(reader.result)
+        let json = JSON.parse(String(reader.result));
         if (json) {
           model.tagListJson = json;
         }
         //
         view.makeTagButton(model.tagListJson);
       }
-      $('#tag-file-name').text(file[0].name);
+      $('#tag-file-name').text(fileList[0].name);
     });
   }
 
   insertTag(model: MesaModel, view: MesaView) {
-    $('#tags').on('click', '.tag-btn', function() {
+    $('#tags').on('click', '.tag-btn', function () {
       let insertString = $(this).attr("val");
       let selections = model.editor.getSelection().getAllRanges();
       // insert all positions
       for (let selection of selections) {
-        if (selection.cursor) {
-          model.editor.session.insert(selection.cursor, insertString);
-        } else {
-          model.editor.session.insert(selection.end, insertString);
-        }
+        model.editor.session.insert(selection.end, insertString);
       }
     });
   }
 
   insertXMLTag(model: MesaModel, view: MesaView) {
-    $('#tags').on('click', '.xml-tag-btn', function() {
+    $('#tags').on('click', '.xml-tag-btn', function () {
       let selections = model.editor.getSelection().getAllRanges();
       let beginTag = "<" + $(this).attr("val") + ">";
       let endTag = "</" + $(this).attr("val") + ">";
@@ -88,11 +89,14 @@ class MesaController {
   }
 
   addTag(model: MesaModel, view: MesaView) {
-    $('#add-tag-btn').on('click', function() {
-      let name = document.getElementById('tag-name-form').value || "name";
-      let sepChar = document.getElementById('tag-sep-form').value || "\t";
-      let xmlFlag = document.getElementById('xml-flag').checked!;
-      let newTag = {
+    $('#add-tag-btn').on('click', function () {
+      const nameElem: HTMLInputElement = <HTMLInputElement>document.getElementById('tag-name-form');
+      const name = nameElem.value || "name";
+      const sepCharElem: HTMLInputElement = <HTMLInputElement>document.getElementById('tag-sep-form');
+      const sepChar = sepCharElem.value || "\t";
+      const xmlFlagElem: HTMLInputElement = <HTMLInputElement>document.getElementById('xml-flag');
+      const xmlFlag = xmlFlagElem.checked!;
+      const newTag = {
         "name": name,
         "sepChar": sepChar,
         "xmlFlag": xmlFlag
@@ -106,36 +110,34 @@ class MesaController {
 
   downloadText(model: MesaModel, view: MesaView) {
     // download text file
-    document.querySelector('#text-donwload')
-      .addEventListener('click', (e) => {
-        // url
-        e.target.href = URL.createObjectURL(
-          new Blob([model.editor.session.getValue()], {
-            type: "text/plain"
-          })
-        )
-        // filename
-        let filename = $('#download-filename').val() || "mesa_file.txt";
-        e.target.download = filename;
-      })
+    $('#text-donwload').on('click', function (evt) {
+      // url
+      evt.target.href = URL.createObjectURL(
+        new Blob([model.editor.session.getValue()], {
+          type: "text/plain"
+        })
+      )
+      // filename
+      let filename = $('#download-filename').val() || "mesa_file.txt";
+      evt.target.download = filename;
+    })
   }
 
-  downloadJson(model, view) {
+  downloadJson(model: MesaModel, view: MesaView) {
     //download json file
-    document.querySelector('#json-donwload')
-      .addEventListener('click', (e) => {
-        // url
-        e.target.href = URL.createObjectURL(new Blob([JSON.stringify(model.tagListJson.concat(model.addedTagListJson), null, 2)], {
-          type: "text/plain"
-        }))
-        // filename
-        let filename = $('#download-jsonname').val() || "mesa_tags";
-        e.target.download = filename + ".json";
-      })
+    $('#json-donwload').on('click', function (evt) {
+      // url
+      evt.target.href = URL.createObjectURL(new Blob([JSON.stringify(model.tagListJson.concat(model.addedTagListJson), null, 2)], {
+        type: "text/plain"
+      }))
+      // filename
+      let filename = $('#download-jsonname').val() || "mesa_tags";
+      evt.target.download = filename + ".json";
+    })
   }
 
   alertWhenReload() {
-    $(window).on('beforeunload', function(e) {
+    $(window).on('beforeunload', function (e) {
       let msg = "Data will be lost if you leave the page, are you sure?";
       return msg;
     });
@@ -143,15 +145,14 @@ class MesaController {
 
   dragController() {
     // (source: https://q-az.net/elements-drag-and-drop/)
-
-    let x;
-    let y;
+    let x: number;
+    let y: number;
     let element = $("#tags")[0];
 
     element.addEventListener("dragstart", mdown);
 
     // when mouce click
-    function mdown() {
+    function mdown(event) {
       // add .drag to the class
       this.classList.add("drag");
       // get the position of the element
@@ -162,8 +163,8 @@ class MesaController {
     }
 
     // when mouse move
-    function mmove() {
-      let drag = document.getElementsByClassName("drag")[0];
+    function mmove(event) {
+      const drag: HTMLInputElement = <HTMLInputElement>document.getElementsByClassName("drag")[0];
       // move the element
       drag.style.top = event.pageY - y + "px";
       drag.style.left = event.pageX - x + "px";
