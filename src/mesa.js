@@ -7,6 +7,7 @@ var MesaModel = /** @class */ (function () {
     }
     return MesaModel;
 }());
+/// <reference path="./MesaModel.ts" />
 var MesaView = /** @class */ (function () {
     function MesaView() {
     }
@@ -61,6 +62,8 @@ var MesaView = /** @class */ (function () {
     };
     return MesaView;
 }());
+/// <reference path="./MesaModel.ts" />
+/// <reference path="./MesaView.ts" />
 var MesaController = /** @class */ (function () {
     function MesaController() {
         // init
@@ -85,34 +88,36 @@ var MesaController = /** @class */ (function () {
     }
     MesaController.prototype.loadTextFile = function (model, view) {
         $('#upload-button').on('change', function (evt) {
-            var file = evt.target.files;
+            var elem = evt.target;
+            var fileList = elem.files;
             // make FileReader
             var reader = new FileReader();
-            reader.readAsText(file[0]);
+            reader.readAsText(fileList[0]);
             // process after loading
             reader.onload = function () {
-                view.writeTextArea(reader.result, model);
+                view.writeTextArea(String(reader.result), model);
             };
-            $('#file-name').text(file[0].name);
+            $('#file-name').text(fileList[0].name);
         });
     };
     MesaController.prototype.loadJsonFile = function (model, view) {
         $('#load-tags-button').on('change', function (evt) {
-            var file = evt.target.files;
+            var elem = evt.target;
+            var fileList = elem.files;
             // make FileReader
             var reader = new FileReader();
-            reader.readAsText(file[0]);
+            reader.readAsText(fileList[0]);
             // process after loading
             reader.onload = function () {
                 // save json in model
-                var json = JSON.parse(reader.result);
+                var json = JSON.parse(String(reader.result));
                 if (json) {
                     model.tagListJson = json;
                 }
                 //
                 view.makeTagButton(model.tagListJson);
             };
-            $('#tag-file-name').text(file[0].name);
+            $('#tag-file-name').text(fileList[0].name);
         });
     };
     MesaController.prototype.insertTag = function (model, view) {
@@ -122,12 +127,7 @@ var MesaController = /** @class */ (function () {
             // insert all positions
             for (var _i = 0, selections_1 = selections; _i < selections_1.length; _i++) {
                 var selection = selections_1[_i];
-                if (selection.cursor) {
-                    model.editor.session.insert(selection.cursor, insertString);
-                }
-                else {
-                    model.editor.session.insert(selection.end, insertString);
-                }
+                model.editor.session.insert(selection.end, insertString);
             }
         });
     };
@@ -148,9 +148,12 @@ var MesaController = /** @class */ (function () {
     };
     MesaController.prototype.addTag = function (model, view) {
         $('#add-tag-btn').on('click', function () {
-            var name = document.getElementById('tag-name-form').value || "name";
-            var sepChar = document.getElementById('tag-sep-form').value || "\t";
-            var xmlFlag = document.getElementById('xml-flag').checked;
+            var nameElem = document.getElementById('tag-name-form');
+            var name = nameElem.value || "name";
+            var sepCharElem = document.getElementById('tag-sep-form');
+            var sepChar = sepCharElem.value || "\t";
+            var xmlFlagElem = document.getElementById('xml-flag');
+            var xmlFlag = xmlFlagElem.checked;
             var newTag = {
                 "name": name,
                 "sepChar": sepChar,
@@ -164,28 +167,26 @@ var MesaController = /** @class */ (function () {
     };
     MesaController.prototype.downloadText = function (model, view) {
         // download text file
-        document.querySelector('#text-donwload')
-            .addEventListener('click', function (e) {
+        $('#text-donwload').on('click', function (evt) {
             // url
-            e.target.href = URL.createObjectURL(new Blob([model.editor.session.getValue()], {
+            evt.target.href = URL.createObjectURL(new Blob([model.editor.session.getValue()], {
                 type: "text/plain"
             }));
             // filename
             var filename = $('#download-filename').val() || "mesa_file.txt";
-            e.target.download = filename;
+            evt.target.download = filename;
         });
     };
     MesaController.prototype.downloadJson = function (model, view) {
         //download json file
-        document.querySelector('#json-donwload')
-            .addEventListener('click', function (e) {
+        $('#json-donwload').on('click', function (evt) {
             // url
-            e.target.href = URL.createObjectURL(new Blob([JSON.stringify(model.tagListJson.concat(model.addedTagListJson), null, 2)], {
+            evt.target.href = URL.createObjectURL(new Blob([JSON.stringify(model.tagListJson.concat(model.addedTagListJson), null, 2)], {
                 type: "text/plain"
             }));
             // filename
             var filename = $('#download-jsonname').val() || "mesa_tags";
-            e.target.download = filename + ".json";
+            evt.target.download = filename + ".json";
         });
     };
     MesaController.prototype.alertWhenReload = function () {
@@ -201,7 +202,7 @@ var MesaController = /** @class */ (function () {
         var element = $("#tags")[0];
         element.addEventListener("dragstart", mdown);
         // when mouce click
-        function mdown() {
+        function mdown(event) {
             // add .drag to the class
             this.classList.add("drag");
             // get the position of the element
@@ -211,7 +212,7 @@ var MesaController = /** @class */ (function () {
             document.body.addEventListener("mousemove", mmove, false);
         }
         // when mouse move
-        function mmove() {
+        function mmove(event) {
             var drag = document.getElementsByClassName("drag")[0];
             // move the element
             drag.style.top = event.pageY - y + "px";
@@ -238,7 +239,7 @@ $(document).ready(function () {
     editor.setTheme("ace/theme/monokai");
     editor.setFontSize(14);
     editor.getSession().setUseWrapMode(true); // 折り返し有効
-    editor.getSession().setMode("ace/mode/html");
+    editor.getSession().setMode("ace/mode/xml");
 });
 /**
  * @fileoverview MesaControllerクラスのインスタンスを生成する。

@@ -1,3 +1,5 @@
+/// <reference path="./MesaModel.ts" />
+
 class MesaView {
   writeTextArea(text: string, model: MesaModel) {
     model.editor.session.setValue(text);
