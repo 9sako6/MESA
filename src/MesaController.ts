@@ -26,7 +26,7 @@ class MesaController {
     this.dragController();
   }
 
-  loadTextFile(model: MesaModel, view: MesaView) {
+  loadTextFile(model: MesaModel, view: MesaView): void {
     $('#upload-button').on('change', function (evt) {
       const elem: HTMLInputElement = <HTMLInputElement>evt.target;
       const fileList: FileList = elem.files;
@@ -41,7 +41,7 @@ class MesaController {
     });
   }
 
-  loadJsonFile(model: MesaModel, view: MesaView) {
+  loadJsonFile(model: MesaModel, view: MesaView): void {
     $('#load-tags-button').on('change', function (evt) {
       const elem: HTMLInputElement = <HTMLInputElement>evt.target;
       const fileList: FileList = elem.files;
@@ -62,7 +62,7 @@ class MesaController {
     });
   }
 
-  insertTag(model: MesaModel, view: MesaView) {
+  insertTag(model: MesaModel, view: MesaView): void {
     $('#tags').on('click', '.tag-btn', function () {
       let insertString = $(this).attr("val");
       let selections = model.editor.getSelection().getAllRanges();
@@ -73,22 +73,28 @@ class MesaController {
     });
   }
 
-  insertXMLTag(model: MesaModel, view: MesaView) {
+  insertXMLTag(model: MesaModel, view: MesaView): void {
     $('#tags').on('click', '.xml-tag-btn', function () {
-      let selections = model.editor.getSelection().getAllRanges();
-      let beginTag = "<" + $(this).attr("val") + ">";
-      let endTag = "</" + $(this).attr("val") + ">";
+      const selections: AceAjax.Range[] = model.editor.getSelection().getAllRanges();
+      const beginTag: string = `<${$(this).attr("val")}>`;
+      const endTag: string = `</${$(this).attr("val")}>`;
       // insert all positions
-      for (let selection of selections) {
+      if (selections.length === 1) {
         // the order (endTag -> beginTag) is important
         // in the case: position.start = position.end
-        model.editor.session.insert(selection.end, endTag);
-        model.editor.session.insert(selection.start, beginTag);
+        model.editor.session.insert(selections[0].end, endTag);
+        model.editor.session.insert(selections[0].start, beginTag);
+      } else {
+        for (let selection of selections) {
+          model.editor.session.insert(selection.start, beginTag);
+          model.editor.session.insert(selection.end, endTag);
+        }
       }
+
     });
   }
 
-  addTag(model: MesaModel, view: MesaView) {
+  addTag(model: MesaModel, view: MesaView): void {
     $('#add-tag-btn').on('click', function () {
       const nameElem: HTMLInputElement = <HTMLInputElement>document.getElementById('tag-name-form');
       const name = nameElem.value || "name";
@@ -108,7 +114,7 @@ class MesaController {
     });
   }
 
-  downloadText(model: MesaModel, view: MesaView) {
+  downloadText(model: MesaModel, view: MesaView): void {
     // download text file
     $('#text-donwload').on('click', function (evt) {
       // url
@@ -123,7 +129,7 @@ class MesaController {
     })
   }
 
-  downloadJson(model: MesaModel, view: MesaView) {
+  downloadJson(model: MesaModel, view: MesaView): void {
     //download json file
     $('#json-donwload').on('click', function (evt) {
       // url
@@ -136,14 +142,14 @@ class MesaController {
     })
   }
 
-  alertWhenReload() {
+  alertWhenReload(): void {
     $(window).on('beforeunload', function (e) {
       let msg = "Data will be lost if you leave the page, are you sure?";
       return msg;
     });
   }
 
-  dragController() {
+  dragController(): void {
     // (source: https://q-az.net/elements-drag-and-drop/)
     let x: number;
     let y: number;
@@ -152,7 +158,7 @@ class MesaController {
     element.addEventListener("dragstart", mdown);
 
     // when mouce click
-    function mdown(event) {
+    function mdown(event): void {
       // add .drag to the class
       this.classList.add("drag");
       // get the position of the element
@@ -163,7 +169,7 @@ class MesaController {
     }
 
     // when mouse move
-    function mmove(event) {
+    function mmove(event): void {
       const drag: HTMLInputElement = <HTMLInputElement>document.getElementsByClassName("drag")[0];
       // move the element
       drag.style.top = event.pageY - y + "px";
@@ -174,7 +180,7 @@ class MesaController {
     }
 
     // when mouse up
-    function mup() {
+    function mup(): void {
       let drag = document.getElementsByClassName("drag")[0];
       // remove move event handlers
       document.body.removeEventListener("mousemove", mmove, false);

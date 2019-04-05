@@ -137,12 +137,18 @@ var MesaController = /** @class */ (function () {
             var beginTag = "<" + $(this).attr("val") + ">";
             var endTag = "</" + $(this).attr("val") + ">";
             // insert all positions
-            for (var _i = 0, selections_2 = selections; _i < selections_2.length; _i++) {
-                var selection = selections_2[_i];
+            if (selections.length === 1) {
                 // the order (endTag -> beginTag) is important
                 // in the case: position.start = position.end
-                model.editor.session.insert(selection.end, endTag);
-                model.editor.session.insert(selection.start, beginTag);
+                model.editor.session.insert(selections[0].end, endTag);
+                model.editor.session.insert(selections[0].start, beginTag);
+            }
+            else {
+                for (var _i = 0, selections_2 = selections; _i < selections_2.length; _i++) {
+                    var selection = selections_2[_i];
+                    model.editor.session.insert(selection.start, beginTag);
+                    model.editor.session.insert(selection.end, endTag);
+                }
             }
         });
     };

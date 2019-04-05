@@ -1,11 +1,11 @@
 /// <reference path="./MesaModel.ts" />
 
 class MesaView {
-  writeTextArea(text: string, model: MesaModel) {
+  writeTextArea(text: string, model: MesaModel): void {
     model.editor.session.setValue(text);
   }
 
-  initUploadButton() {
+  initUploadButton(): void {
     const button: string = `
     <form>
     <label class="func-btn" for="upload-button" style="cursor: pointer">
@@ -17,7 +17,7 @@ class MesaView {
     $('#upload-button').replaceWith(button);
   }
 
-  initSaveButton() {
+  initSaveButton(): void {
     const button: string = `
     <table>
     <tr>
@@ -32,7 +32,7 @@ class MesaView {
     $('#save-button').replaceWith(button);
   }
 
-  initTagUploadButton() {
+  initTagUploadButton(): void {
     const button: string = `
     <form>
       <label class="func-btn" id="load-json" for="load-tags-button" style="cursor: pointer">
@@ -44,7 +44,7 @@ class MesaView {
     $('#tag-upload-button').replaceWith(button);
   }
 
-  initTagSaveButton() {
+  initTagSaveButton(): void {
     const button: string = `
     <div class="func-btn" style="cursor: pointer"><a id="json-donwload" download="mesa_tags.json" href="#">Save Tags</a></div>
     <input type='text' id="download-jsonname" placeholder="Enter a file name">
@@ -52,7 +52,7 @@ class MesaView {
     $('#tag-save-button').replaceWith(button);
   }
 
-  initTagSettingArea() {
+  initTagSettingArea(): void {
     const nameRow: string = `
     <td class="table-header">Name</td>
     <td><input type='text' id="tag-name-form" placeholder="Enter a tag name"></td>`;
@@ -83,7 +83,7 @@ class MesaView {
     $('#tag-setting-area').replaceWith(table);
   }
 
-  makeTagButton(json) {
+  makeTagButton(json): void {
     let addElem: string = ""
     for (let tag of json) {
       if (tag.xmlFlag) {
@@ -96,11 +96,11 @@ class MesaView {
     $('#tags').append(addElem);
   }
 
-  hideAddedMsg() {
+  hideAddedMsg(): void {
     $('#added-message').hide();
   }
 
-  showAddedMsg(tagInfoDic) {
+  showAddedMsg(tagInfoDic): void {
     $('#added-message').append("")
     document.getElementById("added-message").innerText = `${tagInfoDic.name} was added.`;
     $('#added-message').show();
