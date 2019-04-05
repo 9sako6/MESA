@@ -1,11 +1,14 @@
 <div align="center" style="text-align: center;">
 <h1>MESA</h1>
 <img src="./images/mesa_logo.png" width="100">
+
+<p>
+A simple XML annotation tool.
+MESA is available on https://9sako6.me/MESA/
+</p>
 </div>
 
-<hr />
-A simple XML annotation tool.<br>
-MESA is available on <https://9sako6.me/MESA/>
+
 
 ![demo](demo/demo.gif)
 

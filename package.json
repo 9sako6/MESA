@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "gh-pages -m '[AUTO] Upload pages' -d . -a"
+    "deploy": "gh-pages -m '[AUTO] Upload pages' -d . -a",
+    "compile": "tsc js/MesaModel.ts js/MesaView.ts js/MesaController.ts js/aceEditor.ts js/mesa.ts --out js/mesa.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/9sako6/MESA.git"
+    "url": "https://github.com/9sako6/MESA.git"
   },
   "author": "9sako6",
   "license": "ISC",
@@ -18,6 +19,8 @@
   },
   "homepage": "https://github.com/9sako6/MESA#readme",
   "dependencies": {
+    "@types/ace": "0.0.42",
+    "@types/jquery": "^3.3.29",
     "gh-pages": "^2.0.1"
   },
   "devDependencies": {
