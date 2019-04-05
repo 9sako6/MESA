@@ -10,7 +10,7 @@ MESA is available on https://9sako6.me/MESA/
 
 
 
-![demo](demo/demo.gif)
+![demo](images/demo.gif)
 
 ## Features
 - :briefcase: **Portable**
