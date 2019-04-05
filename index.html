@@ -27,71 +27,28 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="./js/mesa.js"></script>
 </head>
+
 <body>
   <main id="root">
-    <div class="all-page">
-      <article class="page">
-        <div class="text-container">
-          <form>
-            <label class="func-btn" for="upload-button" style="cursor: pointer">
-              Open
-              <input type="file" id="upload-button" style="display:none;"
-                onchange="$('#file-name').text($(this).val().split('\\').pop())">
-            </label>
-            <span class="file-info" id="file-name"></span>
-          </form>
-          <!-- ace editor -->
-          <div id="text-editor"></div>
-          <table>
-            <tr>
-              <td>
-                <div class="func-btn" style="cursor: pointer"><a id="text-donwload" download="mesa_file.txt" href="#">Save</a></div>
-              </td>
-              <td>
-                <input id="download-filename" rows="1" placeholder="Enter a file name">
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div class="tags-container">
-
-          <!-- load tags -->
-          <div class="tabs">
-            <input id="tagslist" type="radio" name="tab_item" checked>
-            <label class="tab_item" for="tagslist" style="cursor: pointer">Tags</label>
-            <input id="settings" type="radio" name="tab_item">
-            <label class="tab_item" for="settings" style="cursor: pointer">Settings</label>
-            <!-- Tags -->
-            <div class="tab_content" id="tagslist_content">
-              <div class="tab_content_description">
-                <div class="c-txtsp">
-                  <table>
-                    <tr>
-                      <td>
-                        <div class="load-tags">
-                          <label class="func-btn" id="load-json" for="load-tags-button" style="cursor: pointer">
-                            Load Tags
-                            <input type="file" id="load-tags-button" style="display:none;"
-                              onchange="$('#tag-file-name').text($(this).val().split('\\').pop())">
-                          </label>
-                      </td>
-                    <tr>
-                      <td><span class="file-info" id="tag-file-name"></span></td>
-                    </tr>
-                </div>
-                </tr>
-                </table>
-                <table>
-                  <tr>
-                    <td>
-                      <div class="func-btn" style="cursor: pointer"><a id="json-donwload" download="mesa_tags.json" href="#">Save Tags</a></div>
-                    </td>
-                    <td>
-                      <input id="download-jsonname" rows="1" cols="16" placeholder="Enter a file name">
-                      <span class="file-info">.json</span>
-                    </td>
-                  </tr>
-                </table>
+    <article class="page">
+      <div class="text-container">
+        <div id="upload-button"></div>
+        <div id="text-editor"></div>
+        <div id="save-button"></div>
+      </div>
+      <div class="tags-container">
+        <!-- load tags -->
+        <div class="tabs">
+          <input id="tagslist" type="radio" name="tab_item" checked>
+          <label class="tab_item" for="tagslist" style="cursor: pointer">Tags</label>
+          <input id="settings" type="radio" name="tab_item">
+          <label class="tab_item" for="settings" style="cursor: pointer">Settings</label>
+          <!-- Tags -->
+          <div class="tab_content" id="tagslist_content">
+            <div class="tab_content_description">
+              <div class="c-txtsp">
+                <div id="tag-upload-button"></div>
+                <div id="tag-save-button"></div>
                 <!-- tags -->
                 <div class="tags" id="tags" draggable="true"></div>
               </div>
@@ -102,35 +59,15 @@
             <div class="tab_content_description">
               <div class="c-txtsp">
                 <!-- add tags -->
-                <div class="add-tags">
-                  <table>
-                    <tr>
-                      <td class="table-header">Name</td>
-                      <td><input id="tag-name-form"></td>
-                    </tr>
-                    <tr>
-                      <td class=" table-header">Separator</td>
-                      <td><input id="tag-sep-form" placeholder="If you need ..."></td>
-                    </tr>
-                    <tr>
-                      <td class="table-header">XML Tag</td>
-                      <td>
-                        <input id="xml-flag" type="checkbox">
-                        <label for="xml-flag"></label>
-                      </td>
-                    </tr>
-                  </table>
-                  <div class="func-btn" id="add-tag-btn" style="cursor: pointer">+Add Tag</div>
-                  <div id="added-message"></div>
-                </div>
+                <div id="tag-setting-area"></div>
+                <div class="func-btn" id="add-tag-btn" style="cursor: pointer">Add Tag</div>
+                <div id="added-message"></div>
               </div>
             </div>
           </div>
         </div>
-    </div>
-    </div>
+      </div>
     </article>
-    </div>
   </main>
   <footer>
     <span class="footer-content">

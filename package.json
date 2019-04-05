@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "gh-pages -m '[AUTO] Upload pages' -d . -a",
-    "compile": "tsc js/MesaModel.ts js/MesaView.ts js/MesaController.ts js/aceEditor.ts js/mesa.ts --out js/mesa.js"
+    "compile": "tsc js/MesaModel.ts js/MesaView.ts js/MesaController.ts js/aceEditor.ts js/mesa.ts --out js/mesa.js",
+    "sass": "sass css/style.scss:css/style.css"
   },
   "repository": {
     "type": "git",

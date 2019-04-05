@@ -34,6 +34,9 @@ section {
   padding-right: 10px;
   color: #e6a046; }
 
+#tag-setting-table {
+  margin: 20px; }
+
 #added-message {
   padding: 1em;
   color: #5c6869; }
@@ -131,11 +134,6 @@ input[type=checkbox]:checked + label:before {
 .func-btn a:hover {
   color: #2c3134; }
 
-.add-tags {
-  padding: 10px;
-  display: block;
-  border-radius: 3px; }
-
 .tabs {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   position: absolute;
@@ -180,23 +178,17 @@ input[name="tab_item"] {
   background-color: #e6a046;
   color: #2c3134; }
 
-#download-filename,
-#download-jsonname,
-#tag-name-form,
-#tag-sep-form {
-  resize: none;
-  display: table-cell;
-  vertical-align: middle;
-  font-size: 14px;
-  background-color: #272721;
-  color: #eee; }
+input[type="text"] {
+  outline: 0;
+  border: 0px;
+  background: transparent;
+  border-bottom: solid 1px #aaa;
+  color: #eee;
+  font-size: 14px; }
 
-#download-filename:focus,
-#download-jsonname:focus,
-#tag-name-form:focus,
-#tag-sep-form:focus {
-  box-shadow: 1px 1px 3px 1px #828282;
-  outline: none; }
+input[type="text"]:focus {
+  background: transparent;
+  border-bottom: solid 2px #e6a046; }
 
 #text-editor {
   width: 70vw;

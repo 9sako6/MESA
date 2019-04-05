@@ -5,6 +5,11 @@ class MesaController {
     // init
     this.model = new MesaModel();
     this.view = new MesaView();
+    this.view.initUploadButton();
+    this.view.initSaveButton();
+    this.view.initTagUploadButton();
+    this.view.initTagSaveButton();
+    this.view.initTagSettingArea();
     // events
     this.loadTextFile(this.model, this.view);
     this.loadJsonFile(this.model, this.view);
@@ -20,7 +25,7 @@ class MesaController {
 
   loadTextFile(model: MesaModel, view: MesaView) {
     $('#upload-button').on('change', function(evt) {
-      let file = evt.target.files;
+      let file: File = evt.target.files;
       // make FileReader
       let reader = new FileReader();
       reader.readAsText(file[0]);
@@ -28,6 +33,7 @@ class MesaController {
       reader.onload = function() {
         view.writeTextArea(reader.result, model);
       }
+      $('#file-name').text(file[0].name);
     });
   }
 
@@ -47,6 +53,7 @@ class MesaController {
         //
         view.makeTagButton(model.tagListJson);
       }
+      $('#tag-file-name').text(file[0].name);
     });
   }
 
@@ -152,7 +159,6 @@ class MesaController {
       y = event.pageY - this.offsetTop;
       // callback move events
       document.body.addEventListener("mousemove", mmove, false);
-      // document.body.addEventListener("touchmove", mmove, false);
     }
 
     // when mouse move
@@ -164,8 +170,6 @@ class MesaController {
       // when mouse or cursor over
       drag.addEventListener("mouseup", mup, false);
       document.body.addEventListener("mouseleave", mup, false);
-      // drag.addEventListener("touchend", mup, false);
-      // document.body.addEventListener("touchleave", mup, false);
     }
 
     // when mouse up
@@ -173,11 +177,8 @@ class MesaController {
       let drag = document.getElementsByClassName("drag")[0];
       // remove move event handlers
       document.body.removeEventListener("mousemove", mmove, false);
-      // document.body.removeEventListener("touchmove", mmove, false);
       if (drag != null) {
         drag.removeEventListener("mouseup", mup, false);
-        // drag.removeEventListener("touchend", mup, false);
-        // remove class .drag
         drag.classList.remove("drag");
       }
     }
