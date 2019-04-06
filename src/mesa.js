@@ -173,26 +173,28 @@ var MesaController = /** @class */ (function () {
     };
     MesaController.prototype.downloadText = function (model, view) {
         // download text file
-        $('#text-donwload').on('click', function (evt) {
+        $('#text-donwload').on('click', function (event) {
             // url
-            evt.target.href = URL.createObjectURL(new Blob([model.editor.session.getValue()], {
+            var elem = event.target;
+            elem.href = URL.createObjectURL(new Blob([model.editor.session.getValue()], {
                 type: "text/plain"
             }));
             // filename
             var filename = $('#download-filename').val() || "mesa_file.txt";
-            evt.target.download = filename;
+            elem.download = filename;
         });
     };
     MesaController.prototype.downloadJson = function (model, view) {
         //download json file
-        $('#json-donwload').on('click', function (evt) {
+        $('#json-donwload').on('click', function (event) {
             // url
-            evt.target.href = URL.createObjectURL(new Blob([JSON.stringify(model.tagListJson.concat(model.addedTagListJson), null, 2)], {
+            var elem = event.target;
+            elem.href = URL.createObjectURL(new Blob([JSON.stringify(model.tagListJson.concat(model.addedTagListJson), null, 2)], {
                 type: "text/plain"
             }));
             // filename
             var filename = $('#download-jsonname').val() || "mesa_tags";
-            evt.target.download = filename + ".json";
+            elem.download = filename + ".json";
         });
     };
     MesaController.prototype.alertWhenReload = function () {
@@ -210,10 +212,11 @@ var MesaController = /** @class */ (function () {
         // when mouce click
         function mdown(event) {
             // add .drag to the class
-            this.classList.add("drag");
+            var elem = event.target;
+            elem.classList.add("drag");
             // get the position of the element
-            x = event.pageX - this.offsetLeft;
-            y = event.pageY - this.offsetTop;
+            x = event.pageX - elem.offsetLeft;
+            y = event.pageY - elem.offsetTop;
             // callback move events
             document.body.addEventListener("mousemove", mmove, false);
         }

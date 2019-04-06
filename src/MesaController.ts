@@ -29,7 +29,7 @@ class MesaController {
   loadTextFile(model: MesaModel, view: MesaView): void {
     $('#upload-button').on('change', function (evt) {
       const elem: HTMLInputElement = <HTMLInputElement>evt.target;
-      const fileList: FileList = elem.files;
+      const fileList: FileList = elem.files!;
       // make FileReader
       const reader = new FileReader();
       reader.readAsText(fileList[0]);
@@ -44,7 +44,7 @@ class MesaController {
   loadJsonFile(model: MesaModel, view: MesaView): void {
     $('#load-tags-button').on('change', function (evt) {
       const elem: HTMLInputElement = <HTMLInputElement>evt.target;
-      const fileList: FileList = elem.files;
+      const fileList: FileList = elem.files!;
       // make FileReader
       const reader = new FileReader();
       reader.readAsText(fileList[0]);
@@ -64,7 +64,7 @@ class MesaController {
 
   insertTag(model: MesaModel, view: MesaView): void {
     $('#tags').on('click', '.tag-btn', function () {
-      let insertString = $(this).attr("val");
+      let insertString = $(this).attr("val")!;
       let selections = model.editor.getSelection().getAllRanges();
       // insert all positions
       for (let selection of selections) {
@@ -116,29 +116,31 @@ class MesaController {
 
   downloadText(model: MesaModel, view: MesaView): void {
     // download text file
-    $('#text-donwload').on('click', function (evt) {
+    $('#text-donwload').on('click', function (event) {
       // url
-      evt.target.href = URL.createObjectURL(
+      const elem: HTMLElement = event.target;
+      elem.href = URL.createObjectURL(
         new Blob([model.editor.session.getValue()], {
           type: "text/plain"
         })
       )
       // filename
       let filename = $('#download-filename').val() || "mesa_file.txt";
-      evt.target.download = filename;
+      elem.download = filename;
     })
   }
 
   downloadJson(model: MesaModel, view: MesaView): void {
     //download json file
-    $('#json-donwload').on('click', function (evt) {
+    $('#json-donwload').on('click', function (event) {
       // url
-      evt.target.href = URL.createObjectURL(new Blob([JSON.stringify(model.tagListJson.concat(model.addedTagListJson), null, 2)], {
+      const elem: HTMLElement = event.target;
+      elem.href = URL.createObjectURL(new Blob([JSON.stringify(model.tagListJson.concat(model.addedTagListJson), null, 2)], {
         type: "text/plain"
       }))
       // filename
       let filename = $('#download-jsonname').val() || "mesa_tags";
-      evt.target.download = filename + ".json";
+      elem.download = filename + ".json";
     })
   }
 
@@ -158,18 +160,19 @@ class MesaController {
     element.addEventListener("dragstart", mdown);
 
     // when mouce click
-    function mdown(event): void {
+    function mdown(event: MouseEvent): void {
       // add .drag to the class
-      this.classList.add("drag");
+      const elem = event.target;
+      elem.classList.add("drag");
       // get the position of the element
-      x = event.pageX - this.offsetLeft;
-      y = event.pageY - this.offsetTop;
+      x = event.pageX - elem.offsetLeft;
+      y = event.pageY - elem.offsetTop;
       // callback move events
       document.body.addEventListener("mousemove", mmove, false);
     }
 
     // when mouse move
-    function mmove(event): void {
+    function mmove(event: MouseEvent): void {
       const drag: HTMLInputElement = <HTMLInputElement>document.getElementsByClassName("drag")[0];
       // move the element
       drag.style.top = event.pageY - y + "px";
