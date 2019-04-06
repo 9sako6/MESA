@@ -53,9 +53,9 @@ footer {
 footer {
   padding-top: 0.7em;
   display: block;
-  position: absolute;
+  position: fixed;
   left: 0;
-  width: 100vw;
+  width: 100%;
   bottom: 0;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   font-size: 14px;
@@ -191,7 +191,7 @@ input[type="text"]:focus {
   border-bottom: solid 2px #e6a046; }
 
 #text-editor {
-  width: 70vw;
+  width: 67vw;
   height: 77vh; }
 
 #download-filename {

@@ -62,12 +62,11 @@ footer {
 footer {
   padding-top: 0.7em;
   display: block;
-  position: absolute;
+  position: fixed;
   left: 0;
-  width: 100vw;
+  width: 100%;
   bottom: 0;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  // background-color: rgb(54, 57, 62);
   font-size: 14px;
   box-sizing: border-box;
 }

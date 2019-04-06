@@ -22,10 +22,11 @@ class MesaView {
     <table>
     <tr>
       <td>
-        <div class="func-btn" style="cursor: pointer"><a id="text-donwload" download="mesa_file.txt" href="#">Save</a></div>
+        <div class="func-btn" style="cursor: pointer"><a id="text-donwload" download="mesa_file.xml" href="#">Save</a></div>
       </td>
       <td>
         <input type='text' id="download-filename" placeholder="Enter a file name">
+        <span class="file-info">.xml</span>
       </td>
     </tr>
     </table>`;

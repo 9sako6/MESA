@@ -27,6 +27,7 @@ class MesaController {
   }
 
   loadTextFile(model: MesaModel, view: MesaView): void {
+    const _this = this;
     $('#upload-button').on('change', function (evt) {
       const elem: HTMLInputElement = <HTMLInputElement>evt.target;
       const fileList: FileList = elem.files!;
@@ -35,7 +36,7 @@ class MesaController {
       reader.readAsText(fileList[0]);
       // process after loading
       reader.onload = function () {
-        view.writeTextArea(String(reader.result), model);
+        view.writeTextArea(_this.insertXmlDeclaration(String(reader.result)), model);
       }
       $('#file-name').text(fileList[0].name);
     });
@@ -60,6 +61,11 @@ class MesaController {
       }
       $('#tag-file-name').text(fileList[0].name);
     });
+  }
+
+  insertXmlDeclaration(text: string): string {
+    const reDeclaration: RegExp = /<\?xml[^>]+>/;
+    return reDeclaration.test(text) ? text : `<?xml version="1.0" encoding="UTF-8" ?>\n${text}`;
   }
 
   insertTag(model: MesaModel, view: MesaView): void {
@@ -132,10 +138,10 @@ class MesaController {
       let filename: string;
       const gotValue = $('#download-filename').val();
       if ('string' === typeof gotValue) {
-        filename = gotValue;
+        filename = gotValue === '' ? "mesa_file.xml" : gotValue;
       } else {
-        // if typeof gotValue: string[] or null
-        filename = "mesa_file.txt";
+        // if typeof gotValue: string[]
+        filename = "mesa_file.xml";
       }
       elem.download = filename;
     })
