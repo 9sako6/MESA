@@ -1,3 +1,13 @@
+"use strict";
+$(document).ready(function () {
+    var editor = ace.edit("text-editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.setFontSize(14);
+    editor.getSession().setUseWrapMode(true); // 折り返し有効
+    editor.getSession().setMode("ace/mode/xml");
+});
+
+"use strict";
 var MesaModel = /** @class */ (function () {
     function MesaModel() {
         // init
@@ -7,6 +17,8 @@ var MesaModel = /** @class */ (function () {
     }
     return MesaModel;
 }());
+
+"use strict";
 /// <reference path="./MesaModel.ts" />
 var MesaView = /** @class */ (function () {
     function MesaView() {
@@ -62,6 +74,8 @@ var MesaView = /** @class */ (function () {
     };
     return MesaView;
 }());
+
+"use strict";
 /// <reference path="./MesaModel.ts" />
 /// <reference path="./MesaView.ts" />
 var MesaController = /** @class */ (function () {
@@ -243,13 +257,8 @@ var MesaController = /** @class */ (function () {
     };
     return MesaController;
 }());
-$(document).ready(function () {
-    var editor = ace.edit("text-editor");
-    editor.setTheme("ace/theme/monokai");
-    editor.setFontSize(14);
-    editor.getSession().setUseWrapMode(true); // 折り返し有効
-    editor.getSession().setMode("ace/mode/xml");
-});
+
+"use strict";
 /**
  * @fileoverview MesaControllerクラスのインスタンスを生成する。
  * MesaModel.ts, MesaView.ts, MesaController.tsに依存するので

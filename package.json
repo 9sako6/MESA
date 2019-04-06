@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "gh-pages -m '[AUTO] Upload pages' -d . -a",
-    "compile": "tsc src/MesaModel.ts src/MesaView.ts src/MesaController.ts src/aceEditor.ts src/mesa.ts --out src/mesa.js",
-    "watch": "tsc -w src/MesaModel.ts src/MesaView.ts src/MesaController.ts src/aceEditor.ts src/mesa.ts --out src/mesa.js",
+    "build": "tsc && grunt concat && grunt uglify && rm src/*.js",
+    "grunt": "grunt concat && grunt uglify && rm src/*.js",
     "sass": "sass css/style.scss:css/style.css"
   },
   "repository": {
@@ -26,6 +26,9 @@
     "gh-pages": "^2.0.1"
   },
   "devDependencies": {
-    "gh-pages": "^2.0.1"
+    "gh-pages": "^2.0.1",
+    "grunt": "^1.0.4",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^4.0.1"
   }
 }
