@@ -12,7 +12,9 @@ const CACHE_FILE = [
   // jquery
   "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js",
   // fontawesome
-  "https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+  "https://use.fontawesome.com/releases/v5.6.1/css/all.css",
+  //
+  "./build/mesa.min.js"
 ];
 
 self.addEventListener('install', function(e) {
