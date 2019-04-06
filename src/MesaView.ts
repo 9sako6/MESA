@@ -83,9 +83,9 @@ class MesaView {
     $('#tag-setting-area').replaceWith(table);
   }
 
-  makeTagButton(json): void {
+  makeTagButton(tagList: Tag[]): void {
     let addElem: string = ""
-    for (let tag of json) {
+    for (let tag of tagList) {
       if (tag.xmlFlag) {
         addElem += `<div class="func-btn xml-tag-btn" val="${tag.name}" style="cursor: pointer">${tag.name}</div>`;
       } else {
@@ -100,9 +100,9 @@ class MesaView {
     $('#added-message').hide();
   }
 
-  showAddedMsg(tagInfoDic): void {
+  showAddedMsg(tagInfoDic: Tag): void {
     $('#added-message').append("")
-    document.getElementById("added-message").innerText = `${tagInfoDic.name} was added.`;
+    document.getElementById("added-message")!.innerText = `${tagInfoDic.name} was added.`;
     $('#added-message').show();
     $('#added-message').fadeOut(1500);
   }
