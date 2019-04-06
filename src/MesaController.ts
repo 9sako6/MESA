@@ -118,14 +118,25 @@ class MesaController {
     // download text file
     $('#text-donwload').on('click', function (event) {
       // url
-      const elem: HTMLElement = event.target;
+      interface JsonDownload extends HTMLElement {
+        href: string,
+        download: string
+      };
+      const elem = <JsonDownload>event.target;
       elem.href = URL.createObjectURL(
         new Blob([model.editor.session.getValue()], {
           type: "text/plain"
         })
       )
       // filename
-      let filename = $('#download-filename').val() || "mesa_file.txt";
+      let filename: string;
+      const gotValue = $('#download-filename').val();
+      if ('string' === typeof gotValue) {
+        filename = gotValue;
+      } else {
+        // if typeof gotValue: string[] or null
+        filename = "mesa_file.txt";
+      }
       elem.download = filename;
     })
   }
@@ -134,7 +145,11 @@ class MesaController {
     //download json file
     $('#json-donwload').on('click', function (event) {
       // url
-      const elem: HTMLElement = event.target;
+      interface JsonDownload extends HTMLElement {
+        href: string,
+        download: string
+      };
+      const elem = <JsonDownload>event.target;
       elem.href = URL.createObjectURL(new Blob([JSON.stringify(model.tagListJson.concat(model.addedTagListJson), null, 2)], {
         type: "text/plain"
       }))
@@ -162,11 +177,11 @@ class MesaController {
     // when mouce click
     function mdown(event: MouseEvent): void {
       // add .drag to the class
-      const elem = event.target;
-      elem.classList.add("drag");
+      const elem = <HTMLElement>event.target;
+      elem!.classList.add("drag");
       // get the position of the element
-      x = event.pageX - elem.offsetLeft;
-      y = event.pageY - elem.offsetTop;
+      x = event.pageX - elem!.offsetLeft;
+      y = event.pageY - elem!.offsetTop;
       // callback move events
       document.body.addEventListener("mousemove", mmove, false);
     }

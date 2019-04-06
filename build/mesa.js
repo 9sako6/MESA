@@ -2,7 +2,7 @@
 $(document).ready(function () {
     var editor = ace.edit("text-editor");
     editor.setTheme("ace/theme/monokai");
-    editor.setFontSize(14);
+    editor.setFontSize('14px');
     editor.getSession().setUseWrapMode(true); // 折り返し有効
     editor.getSession().setMode("ace/mode/xml");
 });
@@ -49,10 +49,10 @@ var MesaView = /** @class */ (function () {
         var table = "\n    <table id=\"tag-setting-table\">\n    <tr>\n      " + nameRow + "\n    </tr>\n    <tr>\n      " + sepRow + "\n    </tr>\n    <tr>\n      " + isXmlRow + "\n    </tr>\n    </table>";
         $('#tag-setting-area').replaceWith(table);
     };
-    MesaView.prototype.makeTagButton = function (json) {
+    MesaView.prototype.makeTagButton = function (tagList) {
         var addElem = "";
-        for (var _i = 0, json_1 = json; _i < json_1.length; _i++) {
-            var tag = json_1[_i];
+        for (var _i = 0, tagList_1 = tagList; _i < tagList_1.length; _i++) {
+            var tag = tagList_1[_i];
             if (tag.xmlFlag) {
                 addElem += "<div class=\"func-btn xml-tag-btn\" val=\"" + tag.name + "\" style=\"cursor: pointer\">" + tag.name + "</div>";
             }
@@ -188,20 +188,28 @@ var MesaController = /** @class */ (function () {
     MesaController.prototype.downloadText = function (model, view) {
         // download text file
         $('#text-donwload').on('click', function (event) {
-            // url
+            ;
             var elem = event.target;
             elem.href = URL.createObjectURL(new Blob([model.editor.session.getValue()], {
                 type: "text/plain"
             }));
             // filename
-            var filename = $('#download-filename').val() || "mesa_file.txt";
+            var filename;
+            var gotValue = $('#download-filename').val();
+            if ('string' === typeof gotValue) {
+                filename = gotValue;
+            }
+            else {
+                // if typeof gotValue: string[] or null
+                filename = "mesa_file.txt";
+            }
             elem.download = filename;
         });
     };
     MesaController.prototype.downloadJson = function (model, view) {
         //download json file
         $('#json-donwload').on('click', function (event) {
-            // url
+            ;
             var elem = event.target;
             elem.href = URL.createObjectURL(new Blob([JSON.stringify(model.tagListJson.concat(model.addedTagListJson), null, 2)], {
                 type: "text/plain"
