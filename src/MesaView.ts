@@ -53,7 +53,7 @@ class MesaView {
     $('#tag-save-button').replaceWith(button);
   }
 
-  initTagSettingArea(): void {
+  initTagSettingTable(): void {
     const nameRow: string = `
     <td class="table-header">Name</td>
     <td><input type='text' id="tag-name-form" placeholder="Enter a tag name"></td>`;
@@ -63,25 +63,39 @@ class MesaView {
     <td><input type='text' id="tag-sep-form" placeholder="If you need ..."></td>`;
 
     const isXmlRow: string = `
-    <td class="table-header">XML Tag</td>
+    <td class="table-header">XML Tag?</td>
     <td>
       <input id="xml-flag" type="checkbox">
       <label for="xml-flag"></label>
     </td>`;
 
+    const attributeRow: string = `
+    <td><input type='text' class="attribute-name-form" placeholder="Enter a name"></td>
+    <td><input type='text' class="attribute-value-form" placeholder="Enter a value"></td>`;
+
+    const addAttributeButton: string = `<div class="func-btn" id="add-attribute" style="cursor: pointer; width: 20px; height: 20px; padding: 0;">+</div>`;
+
     const table: string = `
-    <table id="tag-setting-table">
-    <tr>
-      ${nameRow}
-    </tr>
-    <tr>
-      ${sepRow}
-    </tr>
+    <table class="tag-setting-table">
     <tr>
       ${isXmlRow}
     </tr>
+    <tr>
+    ${nameRow}
+    </tr>
+    <tr id="tag-separator">
+      ${sepRow}
+    </tr>
+    <tr id="attributes-header">
+      <td class="table-header">Attributes${addAttributeButton}</td>
+    </tr>
+    </table>
+    <table class="tag-setting-table" id="attributes-input">
+    <tr>
+    ${attributeRow}
+    </tr>
     </table>`;
-    $('#tag-setting-area').replaceWith(table);
+    $('#tag-setting-table').html(table);
   }
 
   makeTagButton(tagList: Tag[]): void {
@@ -106,5 +120,12 @@ class MesaView {
     document.getElementById("added-message")!.innerText = `${tagInfoDic.name} was added.`;
     $('#added-message').show();
     $('#added-message').fadeOut(1500);
+  }
+
+  addAttributesInput(): void {
+    const attributeRow: string = `
+    <td><input type='text' id="attribute-name-form" placeholder="Enter a name"></td>
+    <td><input type='text' id="attribute-value-form" placeholder="Enter a value"></td>`;
+    $('#attributes-input').append(`<tr>${attributeRow}</tr>`);
   }
 }

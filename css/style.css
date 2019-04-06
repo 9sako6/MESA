@@ -32,9 +32,13 @@ section {
 
 .table-header {
   padding-right: 10px;
-  color: #e6a046; }
+  color: #e6a046;
+  width: 150px; }
 
-#tag-setting-table {
+.tag-setting-table {
+  margin: 20px; }
+
+#add-tag-btn {
   margin: 20px; }
 
 #added-message {

@@ -12,13 +12,15 @@ class MesaController {
     this.view.initSaveButton();
     this.view.initTagUploadButton();
     this.view.initTagSaveButton();
-    this.view.initTagSettingArea();
+    this.view.initTagSettingTable();
     // events
     this.loadTextFile(this.model, this.view);
     this.loadJsonFile(this.model, this.view);
     this.insertTag(this.model, this.view);
     this.insertXMLTag(this.model, this.view);
     this.addTag(this.model, this.view);
+    this.showAttributes();
+    this.addAttributes(this.model, this.view);
     this.downloadText(this.model, this.view);
     this.downloadJson(this.model, this.view);
     //
@@ -96,11 +98,36 @@ class MesaController {
           model.editor.session.insert(selection.end, endTag);
         }
       }
+    });
+  }
 
+  showAttributes(): void {
+    $('#attributes-header').hide();
+    $('#attributes-input').hide();
+    $(document).on('change', '#xml-flag', function () {
+      if ($(this).prop('checked')) {
+        $('#attributes-header').show();
+        $('#attributes-input').show();
+        $('#tag-separator').hide();
+      } else {
+        $('#attributes-header').hide();
+        $('#attributes-input').hide();
+        $('#tag-separator').show();
+      }
+    });
+  }
+
+  addAttributes(model: MesaModel, view: MesaView): void {
+    $('#add-attribute').on('click', () => {
+      view.addAttributesInput();
+      // event 削除 and 再登録
+      $('#add-tag-btn').get(0).onclick = null;
+      this.addTag(model, view);
     });
   }
 
   addTag(model: MesaModel, view: MesaView): void {
+    const _this = this;
     $('#add-tag-btn').on('click', function () {
       const nameElem: HTMLInputElement = <HTMLInputElement>document.getElementById('tag-name-form');
       const name = nameElem.value || "name";
@@ -108,16 +135,33 @@ class MesaController {
       const sepChar = sepCharElem.value || "\t";
       const xmlFlagElem: HTMLInputElement = <HTMLInputElement>document.getElementById('xml-flag');
       const xmlFlag = xmlFlagElem.checked!;
+      const attributes = _this.getAttributes();
       const newTag = {
         "name": name,
         "sepChar": sepChar,
-        "xmlFlag": xmlFlag
+        "xmlFlag": xmlFlag,
+        "attributes": attributes
       };
       // save tags added by user in model
       model.addedTagListJson.push(newTag);
       view.makeTagButton([newTag]);
       view.showAddedMsg(newTag);
     });
+  }
+
+  getAttributes(): Attribute[] {
+    // TODO 動的に追加した要素が取れない
+    const attrNames: HTMLCollection = document.getElementsByClassName('attribute-name-form');
+    const attrValues: HTMLCollection = document.getElementsByClassName('attribute-value-form');
+    const attrCnt = attrNames.length;
+    let attributes: Attribute[] = []; 
+    for (let i=0; i < attrCnt; i++) {
+      const name = Array.prototype.slice.call(attrNames)[i].value;
+      const value = Array.prototype.slice.call(attrValues)[i].value;
+      attributes.push({ 'name': name, 'value': value });
+    }
+    console.log(attributes)
+    return attributes;
   }
 
   downloadText(model: MesaModel, view: MesaView): void {
