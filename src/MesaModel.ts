@@ -1,7 +1,13 @@
+interface Attribute {
+  name: string,
+  value: string
+}
+
 interface Tag {
   name: string,
   sepChar: string,
-  xmlFlag: boolean
+  xmlFlag: boolean,
+  attributes: Attribute[]
 }
 
 class MesaModel {

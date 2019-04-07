@@ -40,8 +40,13 @@ section {
 .table-header {
   padding-right: 10px;
   color: rgb(230, 160, 70);
+  width: 150px;
 }
-#tag-setting-table {
+.tag-setting-table {
+  margin: 20px;
+}
+
+#add-tag-btn {
   margin: 20px;
 }
 #added-message {
@@ -62,12 +67,11 @@ footer {
 footer {
   padding-top: 0.7em;
   display: block;
-  position: absolute;
+  position: fixed;
   left: 0;
-  width: 100vw;
+  width: 100%;
   bottom: 0;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  // background-color: rgb(54, 57, 62);
   font-size: 14px;
   box-sizing: border-box;
 }

@@ -12,13 +12,16 @@ class MesaController {
     this.view.initSaveButton();
     this.view.initTagUploadButton();
     this.view.initTagSaveButton();
-    this.view.initTagSettingArea();
+    this.view.initTagSettingTable();
     // events
     this.loadTextFile(this.model, this.view);
     this.loadJsonFile(this.model, this.view);
     this.insertTag(this.model, this.view);
     this.insertXMLTag(this.model, this.view);
     this.addTag(this.model, this.view);
+    this.activateClearButton(this.model, this.view);
+    this.showAttributes();
+    this.addAttributes(this.model, this.view);
     this.downloadText(this.model, this.view);
     this.downloadJson(this.model, this.view);
     //
@@ -27,6 +30,7 @@ class MesaController {
   }
 
   loadTextFile(model: MesaModel, view: MesaView): void {
+    const _this = this;
     $('#upload-button').on('change', function (evt) {
       const elem: HTMLInputElement = <HTMLInputElement>evt.target;
       const fileList: FileList = elem.files!;
@@ -35,7 +39,7 @@ class MesaController {
       reader.readAsText(fileList[0]);
       // process after loading
       reader.onload = function () {
-        view.writeTextArea(String(reader.result), model);
+        view.writeTextArea(_this.insertXmlDeclaration(String(reader.result)), model);
       }
       $('#file-name').text(fileList[0].name);
     });
@@ -62,6 +66,11 @@ class MesaController {
     });
   }
 
+  insertXmlDeclaration(text: string): string {
+    const reDeclaration: RegExp = /<\?xml[^>]+>/;
+    return reDeclaration.test(text) ? text : `<?xml version="1.0" encoding="UTF-8" ?>\n${text}`;
+  }
+
   insertTag(model: MesaModel, view: MesaView): void {
     $('#tags').on('click', '.tag-btn', function () {
       let insertString = $(this).attr("val")!;
@@ -76,7 +85,16 @@ class MesaController {
   insertXMLTag(model: MesaModel, view: MesaView): void {
     $('#tags').on('click', '.xml-tag-btn', function () {
       const selections: AceAjax.Range[] = model.editor.getSelection().getAllRanges();
-      const beginTag: string = `<${$(this).attr("val")}>`;
+      // get attributes
+      let attributes: string = '';
+      $(this).attr('attributes')!.split(',').forEach(function (attribute) {
+        const vals = attribute.split('__MESA_ATTRIBUTE_SEPARATOR__');
+        if (vals[0] && vals[1]) {
+          attributes += ` ${vals[0]}="${vals[1]}"`; // space is neccessary
+        }
+      });
+      // make tag
+      const beginTag: string = `<${$(this).attr("val")}${attributes}>`;
       const endTag: string = `</${$(this).attr("val")}>`;
       // insert all positions
       if (selections.length === 1) {
@@ -90,11 +108,36 @@ class MesaController {
           model.editor.session.insert(selection.end, endTag);
         }
       }
+    });
+  }
 
+  showAttributes(): void {
+    $('#attributes-header').hide();
+    $('#attributes-input').hide();
+    $(document).on('change', '#xml-flag', function () {
+      if ($(this).prop('checked')) {
+        $('#attributes-header').show();
+        $('#attributes-input').show();
+        $('#tag-separator').hide();
+      } else {
+        $('#attributes-header').hide();
+        $('#attributes-input').hide();
+        $('#tag-separator').show();
+      }
+    });
+  }
+
+  addAttributes(model: MesaModel, view: MesaView): void {
+    $('#add-attribute').on('click', () => {
+      view.addAttributesInput();
+      // event 削除 and 再登録
+      // $('#add-tag-btn').get(0).onclick = null;
+      // this.addTag(model, view);
     });
   }
 
   addTag(model: MesaModel, view: MesaView): void {
+    const _this = this;
     $('#add-tag-btn').on('click', function () {
       const nameElem: HTMLInputElement = <HTMLInputElement>document.getElementById('tag-name-form');
       const name = nameElem.value || "name";
@@ -102,15 +145,43 @@ class MesaController {
       const sepChar = sepCharElem.value || "\t";
       const xmlFlagElem: HTMLInputElement = <HTMLInputElement>document.getElementById('xml-flag');
       const xmlFlag = xmlFlagElem.checked!;
+      const attributes = _this.getAttributes();
       const newTag = {
         "name": name,
         "sepChar": sepChar,
-        "xmlFlag": xmlFlag
+        "xmlFlag": xmlFlag,
+        "attributes": attributes
       };
       // save tags added by user in model
       model.addedTagListJson.push(newTag);
       view.makeTagButton([newTag]);
       view.showAddedMsg(newTag);
+    });
+  }
+
+  getAttributes(): Attribute[] {
+    let attributes: Attribute[] = [];
+    $('#attributes-input').find('tr').each(function (index: number, trElem: HTMLElement) {
+      // a trElem has two inputs
+      // the first input has name of attribute, the second has value of attribute
+      let inputVals: Attribute = { name: '', value: '' };
+      $(trElem).find('input').each(function (i, elem) {
+        const input: HTMLInputElement = <HTMLInputElement>elem;
+        if (i === 0) {
+          inputVals.name = input.value;
+        } else {
+          inputVals.value = input.value;
+        }
+      });
+      attributes.push(inputVals);
+    });
+    return attributes;
+  }
+
+  activateClearButton(model: MesaModel, view: MesaView): void {
+    $('#clear-btn').on('click', (event) => {
+      view.initTagSettingTable();
+      this.showAttributes();
     });
   }
 
@@ -129,15 +200,8 @@ class MesaController {
         })
       )
       // filename
-      let filename: string;
-      const gotValue = $('#download-filename').val();
-      if ('string' === typeof gotValue) {
-        filename = gotValue;
-      } else {
-        // if typeof gotValue: string[] or null
-        filename = "mesa_file.txt";
-      }
-      elem.download = filename;
+      let filename = $('#download-filename').val() || "mesa_file";
+      elem.download = filename + ".xml";
     })
   }
 

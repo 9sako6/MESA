@@ -1,12 +1,12 @@
 {
-  "name": "MESA",
+  "name": "mesa",
   "version": "0.2.0",
   "description": "A simple XML annotation tool.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "gh-pages -m '[AUTO] Upload pages' -d . -a",
-    "build": "tsc && grunt concat && grunt uglify && rm src/*.js",
+    "build": "tsc && grunt concat && grunt uglify && rm src/*.js build/mesa.js",
     "sass": "sass css/style.scss:css/style.css"
   },
   "repository": {
