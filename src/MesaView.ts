@@ -102,7 +102,13 @@ class MesaView {
     let addElem: string = ""
     for (let tag of tagList) {
       if (tag.xmlFlag) {
-        addElem += `<div class="func-btn xml-tag-btn" val="${tag.name}" style="cursor: pointer">${tag.name}</div>`;
+        // get attributes
+        let attributes: string = '';
+        tag.attributes.forEach(function(attr: Attribute) {
+          attributes+= `${attr.name}__MESA_ATTRIBUTE_SEPARATOR__${attr.value},`; // __MESA_ATTRIBUTE_SEPARATOR__ and comma is neccessary
+        });
+        // make tag
+        addElem += `<div class="func-btn xml-tag-btn" val="${tag.name}" attributes="${attributes}" style="cursor: pointer">${tag.name}</div>`;
       } else {
         addElem += `<div class="func-btn tag-btn" val="${tag.sepChar + tag.name}" style="cursor: pointer">${tag.name}</div>`;
       }

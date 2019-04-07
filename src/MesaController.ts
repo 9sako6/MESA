@@ -19,6 +19,7 @@ class MesaController {
     this.insertTag(this.model, this.view);
     this.insertXMLTag(this.model, this.view);
     this.addTag(this.model, this.view);
+    this.activateClearButton(this.model, this.view);
     this.showAttributes();
     this.addAttributes(this.model, this.view);
     this.downloadText(this.model, this.view);
@@ -84,7 +85,16 @@ class MesaController {
   insertXMLTag(model: MesaModel, view: MesaView): void {
     $('#tags').on('click', '.xml-tag-btn', function () {
       const selections: AceAjax.Range[] = model.editor.getSelection().getAllRanges();
-      const beginTag: string = `<${$(this).attr("val")}>`;
+      // get attributes
+      let attributes: string = '';
+      $(this).attr('attributes')!.split(',').forEach(function (attribute) {
+        const vals = attribute.split('__MESA_ATTRIBUTE_SEPARATOR__');
+        if (vals[0] && vals[1]) {
+          attributes += ` ${vals[0]}="${vals[1]}"`; // space is neccessary
+        }
+      });
+      // make tag
+      const beginTag: string = `<${$(this).attr("val")}${attributes}>`;
       const endTag: string = `</${$(this).attr("val")}>`;
       // insert all positions
       if (selections.length === 1) {
@@ -121,8 +131,8 @@ class MesaController {
     $('#add-attribute').on('click', () => {
       view.addAttributesInput();
       // event 削除 and 再登録
-      $('#add-tag-btn').get(0).onclick = null;
-      this.addTag(model, view);
+      // $('#add-tag-btn').get(0).onclick = null;
+      // this.addTag(model, view);
     });
   }
 
@@ -150,18 +160,29 @@ class MesaController {
   }
 
   getAttributes(): Attribute[] {
-    // TODO 動的に追加した要素が取れない
-    const attrNames: HTMLCollection = document.getElementsByClassName('attribute-name-form');
-    const attrValues: HTMLCollection = document.getElementsByClassName('attribute-value-form');
-    const attrCnt = attrNames.length;
-    let attributes: Attribute[] = []; 
-    for (let i=0; i < attrCnt; i++) {
-      const name = Array.prototype.slice.call(attrNames)[i].value;
-      const value = Array.prototype.slice.call(attrValues)[i].value;
-      attributes.push({ 'name': name, 'value': value });
-    }
-    console.log(attributes)
+    let attributes: Attribute[] = [];
+    $('#attributes-input').find('tr').each(function (index: number, trElem: HTMLElement) {
+      // a trElem has two inputs
+      // the first input has name of attribute, the second has value of attribute
+      let inputVals: Attribute = { name: '', value: '' };
+      $(trElem).find('input').each(function (i, elem) {
+        const input: HTMLInputElement = <HTMLInputElement>elem;
+        if (i === 0) {
+          inputVals.name = input.value;
+        } else {
+          inputVals.value = input.value;
+        }
+      });
+      attributes.push(inputVals);
+    });
     return attributes;
+  }
+
+  activateClearButton(model: MesaModel, view: MesaView): void {
+    $('#clear-btn').on('click', (event) => {
+      view.initTagSettingTable();
+      this.showAttributes();
+    });
   }
 
   downloadText(model: MesaModel, view: MesaView): void {
@@ -179,15 +200,8 @@ class MesaController {
         })
       )
       // filename
-      let filename: string;
-      const gotValue = $('#download-filename').val();
-      if ('string' === typeof gotValue) {
-        filename = gotValue === '' ? "mesa_file.xml" : gotValue;
-      } else {
-        // if typeof gotValue: string[]
-        filename = "mesa_file.xml";
-      }
-      elem.download = filename;
+      let filename = $('#download-filename').val() || "mesa_file";
+      elem.download = filename + ".xml";
     })
   }
 
