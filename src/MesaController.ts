@@ -182,6 +182,7 @@ class MesaController {
     $('#clear-btn').on('click', (event) => {
       view.initTagSettingTable();
       this.showAttributes();
+      this.addAttributes(model, view);
     });
   }
 
