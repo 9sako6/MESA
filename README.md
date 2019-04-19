@@ -4,7 +4,7 @@
 
 <p>
 A simple XML annotation tool.
-MESA is available on https://9sako6.me/MESA/
+MESA is available on https://9sako6.github.io/MESA/
 </p>
 </div>
 
