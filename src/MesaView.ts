@@ -9,7 +9,7 @@ export default class MesaView {
   initUploadButton(): void {
     const button: string = `
     <form>
-    <label class="func-btn" for="upload-button" style="cursor: pointer">
+    <label class="func-btn" for="upload-button">
       Open
       <input type="file" id="upload-button" style="display:none;">
     </label>
@@ -23,7 +23,7 @@ export default class MesaView {
     <table>
     <tr>
       <td>
-        <div class="func-btn" style="cursor: pointer"><a id="text-donwload" download="mesa_file.xml" href="#">Save</a></div>
+        <div class="func-btn"><a id="text-donwload" download="mesa_file.xml" href="#">Save</a></div>
       </td>
       <td>
         <input type='text' id="download-filename" placeholder="Enter a file name">
@@ -37,7 +37,7 @@ export default class MesaView {
   initTagUploadButton(): void {
     const button: string = `
     <form>
-      <label class="func-btn" id="load-json" for="load-tags-button" style="cursor: pointer">
+      <label class="func-btn" id="load-json" for="load-tags-button">
         Load Tags
         <input type="file" id="load-tags-button" style="display:none;">
       </label>
@@ -48,7 +48,7 @@ export default class MesaView {
 
   initTagSaveButton(): void {
     const button: string = `
-    <div class="func-btn" style="cursor: pointer"><a id="json-donwload" download="mesa_tags.json" href="#">Save Tags</a></div>
+    <div class="func-btn"><a id="json-donwload" download="mesa_tags.json" href="#">Save Tags</a></div>
     <input type='text' id="download-jsonname" placeholder="Enter a file name">
     <span class="file-info">.json</span>`;
     $("#tag-save-button").replaceWith(button);
@@ -74,7 +74,7 @@ export default class MesaView {
     <td><input type='text' class="attribute-name-form" placeholder="Enter a name"></td>
     <td><input type='text' class="attribute-value-form" placeholder="Enter a value"></td>`;
 
-    const addAttributeButton: string = `<div class="func-btn" id="add-attribute" style="cursor: pointer; width: 20px; height: 20px; padding: 0;">+</div>`;
+    const addAttributeButton: string = `<div class="func-btn" id="add-attribute">Add an attribute</div>`;
 
     const table: string = `
     <table class="tag-setting-table">
@@ -88,7 +88,7 @@ export default class MesaView {
       ${sepRow}
     </tr>
     <tr id="attributes-header">
-      <td class="table-header">Attributes${addAttributeButton}</td>
+      <td class="table-header">Attributes</td><td>${addAttributeButton}</td>
     </tr>
     </table>
     <table class="tag-setting-table" id="attributes-input">
@@ -105,14 +105,16 @@ export default class MesaView {
       if (tag.xmlFlag) {
         // get attributes
         let attributes: string = "";
-        tag.attributes.forEach(function(attr: Attribute) {
-          attributes += `${attr.name}__MESA_ATTRIBUTE_SEPARATOR__${attr.value},`; // __MESA_ATTRIBUTE_SEPARATOR__ and comma is neccessary
-        });
+        if (tag.attributes !== undefined) {
+          tag.attributes.forEach(function(attr: Attribute) {
+            attributes += `${attr.name}__MESA_ATTRIBUTE_SEPARATOR__${attr.value},`; // __MESA_ATTRIBUTE_SEPARATOR__ and comma is neccessary
+          });
+        }
         // make tag
-        addElem += `<div class="func-btn xml-tag-btn" val="${tag.name}" attributes="${attributes}" style="cursor: pointer">${tag.name}</div>`;
+        addElem += `<div class="func-btn xml-tag-btn" val="${tag.name}" attributes="${attributes}">${tag.name}</div>`;
       } else {
         addElem += `<div class="func-btn tag-btn" val="${tag.sepChar +
-          tag.name}" style="cursor: pointer">${tag.name}</div>`;
+          tag.name}">${tag.name}</div>`;
       }
     }
     // add buttons
