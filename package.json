@@ -4,10 +4,18 @@
   "description": "A simple XML annotation tool.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "tsc --noEmit",
     "deploy": "gh-pages -m '[AUTO] Upload pages' -d . -a",
-    "build": "tsc && grunt concat && grunt uglify && rm src/*.js build/mesa.js",
-    "sass": "sass css/style.scss:css/style.css"
+    "dev": "./node_modules/.bin/webpack --mode development",
+    "build": "./node_modules/.bin/webpack --mode production",
+    "fmt": "prettier --write src/**/*.tsx src/**/*.ts"
+  },
+  "prettier": {
+    "endOfLine": "lf",
+    "singleQuote": false,
+    "semi": true,
+    "tabWidth": 2,
+    "trailingComma": "es5"
   },
   "repository": {
     "type": "git",
@@ -22,12 +30,18 @@
   "dependencies": {
     "@types/ace": "0.0.42",
     "@types/jquery": "^3.3.29",
-    "gh-pages": "^2.0.1"
+    "jquery": "^3.4.1"
   },
   "devDependencies": {
-    "gh-pages": "^2.0.1",
-    "grunt": "^1.0.4",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-uglify": "^4.0.1"
+    "css-loader": "^3.2.0",
+    "gh-pages": "^2.1.1",
+    "node-sass": "^4.12.0",
+    "prettier": "^1.18.2",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "ts-loader": "^6.1.2",
+    "typescript": "^3.6.3",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.5"
   }
 }
