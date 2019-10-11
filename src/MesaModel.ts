@@ -1,16 +1,16 @@
-interface Attribute {
-  name: string,
-  value: string
+export interface Attribute {
+  name: string;
+  value: string;
 }
 
-interface Tag {
-  name: string,
-  sepChar: string,
-  xmlFlag: boolean,
-  attributes: Attribute[]
+export interface Tag {
+  name: string;
+  sepChar: string;
+  xmlFlag: boolean;
+  attributes: Attribute[];
 }
 
-class MesaModel {
+export default class MesaModel {
   editor: AceAjax.Editor;
   tagListJson: Tag[];
   addedTagListJson: Tag[];

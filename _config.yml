@@ -1,5 +1,0 @@
-gems:
-  - jekyll-feed
-exclude:
-  - Gemfile
-  - Gemfile.lock
