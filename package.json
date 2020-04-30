@@ -30,7 +30,7 @@
   "dependencies": {
     "@types/ace": "0.0.42",
     "@types/jquery": "^3.3.29",
-    "jquery": "^3.4.1"
+    "jquery": "^3.5.0"
   },
   "devDependencies": {
     "css-loader": "^3.2.0",
